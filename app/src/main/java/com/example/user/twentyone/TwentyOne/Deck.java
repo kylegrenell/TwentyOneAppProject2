@@ -1,5 +1,7 @@
 package com.example.user.twentyone.TwentyOne;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,21 +13,24 @@ import java.util.List;
 
 public class Deck {
 
-    private ArrayList<Card> cards;
     // array for suit and rank
+    private ArrayList<Card> cards;
 
+
+    // a deck made up of 4 suits and 13 ranks
+    // call initialise method
     public Deck() {
         cards = new ArrayList<Card>();
-        // a deck made up of 4 suits and 13 ranks
         initialiseDeck();
-        // initialise the array
     }
 
+
+    // initialise the array
     private void initialiseDeck() {
 
         int count = 0;
         for (int s = 0; s < 4; s++) {
-            // s for suit, r for rank
+            // i for suit, r for rank, ++ increments
             for (int r = 0; r < 13; r++) {
                 cards.add(new Card(s, r));
             }
@@ -33,8 +38,20 @@ public class Deck {
         }
     }
 
+
     // shuffle array of cards
     public void shuffle() {
         Collections.shuffle(cards);
     }
+
+    public void removeCards(){
+        for (int i = 0; i < cards.size(); i++ )
+        {
+            Log.d("Deck", cards.get(i).toString());
+            // log.d is API for sending log output
+        }
+
+    }
+
+
 }

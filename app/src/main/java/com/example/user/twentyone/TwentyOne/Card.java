@@ -36,4 +36,11 @@ public class Card {
         suit = Suit.values()[s];
         rank = Rank.values()[r];
     }
+
+    @Override
+    public String toString(){
+        return suit + " " + rank;
+    }
+
+
 }
