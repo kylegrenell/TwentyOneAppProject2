@@ -14,6 +14,9 @@ import com.example.user.twentyone.TwentyOne.Table;
 
 public class MainActivity extends AppCompatActivity {
 
+    Player player;
+    Table table;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // log the onCreate call
@@ -22,27 +25,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // create table to play at
-        Table table = new Table();
+        table = new Table();
 
         // add players to the table
-        Player player = new Player("kyle");
-        Player player2 = new Player("jeff");
+        player = new Player("kyle");
 
         // add those players to the table
         table.sitAtTable(player);
-        table.sitAtTable(player2);
 
         // check table state
         table.checkTable();
-        // remove the table after finished
-        table.removeTable();
+        // clear the table after finished
+        table.clearTable();
 
     }
 
-//    public void buttonClicked(View view) {
+    public void buttonClicked(View view) {
+        player.setAction(Player.Action.HIT);
+        table.clearTable();
 //        TextView textView = (TextView) findViewById(R.id.textView);
 //        Log.d("Main", "button clicked");
-//    }
+    }
 
 
 }

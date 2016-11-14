@@ -37,6 +37,14 @@ public class Card {
         rank = Rank.values()[r];
     }
 
+    public int getCardValue(){
+        if(suit.ordinal() < 9)
+        return suit.ordinal();
+        else
+            return 10;
+    }
+
+
     @Override
     public String toString(){
         return suit + " " + rank;

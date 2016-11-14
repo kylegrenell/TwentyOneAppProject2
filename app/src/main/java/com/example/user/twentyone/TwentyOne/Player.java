@@ -15,6 +15,7 @@ public class Player {
     private ArrayList<Card> hand;
     private String name;
     private State playerGameState;
+    private Action currentAction;
 
     public Player(String name) {
         name = name;
@@ -25,11 +26,29 @@ public class Player {
     }
 
 
-    private enum State{
+    public enum State{
         PLAYING,
         WON,
         BUST,
         STAND
+    }
+
+
+    // get current actions
+    public enum Action{
+        WAITING,
+        HIT,
+        STAND
+    }
+
+    //
+    public Action askAction(){
+        return currentAction;
+    }
+
+    // setter
+    public void setAction(Action action){
+        currentAction = action;
     }
 
     // hits and then returns a card to the hand
@@ -40,6 +59,11 @@ public class Player {
     //Stand won't ask player to hit
     public void stand(){
         playerGameState = State.STAND;
+    }
+
+
+    public State getState(){
+        return playerGameState;
     }
 
     // getter for state (ie can do... can't do...)
@@ -54,6 +78,19 @@ public class Player {
             Log.v(name, hand.get(i).toString());
         }
     }
+
+    //get the value of the cards in hand
+    public int getHandValue(){
+
+        int total = 0;
+
+        for(int i = 0; i < hand.size(); i++)
+        total += hand.get(i).getCardValue();
+
+        return total;
+
+    }
+
 
     // getter for card count
     public int getCardCount(){

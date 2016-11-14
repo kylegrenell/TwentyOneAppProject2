@@ -17,6 +17,7 @@ public class Table {
         NEW_GAME,
         PLAYING,
         PAUSE,
+        RESOLVE
     }
 
     public Table(){
@@ -49,20 +50,48 @@ public class Table {
                 while (dealer.getCardCount() < 2) {
 
                     for (int i = 0; i < players.size(); i++)
-
                         players.get(i).hit(deck.dealCard());
+
 
                 dealer.hit(deck.dealCard());
             }
+
+//                tableState = State.PLAYING;
             break;
+            }
+
+            // ask player for an action
+            case PLAYING:{
+                for(int i = 0; i < players.size(); i++){
+
+                    while (players.get(i).getState() != Player.State.STAND ||
+                            players.get(i).getState() != Player.State.BUST) {
+
+                        if (players.get(i).askAction() == Player.Action.HIT)
+                            players.get(i).hit(deck.dealCard());
+                        if (players.get(i).getHandValue() > 21)
+                            players.get(i).setState(Player.State.BUST);
+                    }
+
+                    if(players.get(i).askAction() == Player.Action.STAND)
+                        players.get(i).setState(Player.State.STAND);
+
+                }
+                while(dealer.getHandValue() < 17)
+                    dealer.hit(deck.dealCard());
+
+                tableState = State.RESOLVE;
+                break;
             }
             default:
                 break;
         }
     }
 
+
+
     // take in the list of current players and output the table
-    public void removeTable(){
+    public void clearTable(){
         for(int i = 0; i < players.size(); i++){
             players.get(i).showHand();
             }
