@@ -17,7 +17,6 @@ public class Table {
         NEW_GAME,
         PLAYING,
         PAUSE,
-
     }
 
     public Table(){

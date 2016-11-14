@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.example.user.twentyone.TwentyOne.Deck;
 import com.example.user.twentyone.TwentyOne.Player;
+import com.example.user.twentyone.TwentyOne.Table;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,13 +21,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Deck deck = new Deck();
-//        deck.removeCards();
+        // create table to play at
+        Table table = new Table();
 
-        Player player = new Player("Kyle");
-        player.hit(deck.dealCard());
-        player.hit(deck.dealCard());
-        player.showHand();
+        // add players to the table
+        Player player = new Player("kyle");
+        Player player2 = new Player("jeff");
+
+        // add those players to the table
+        table.sitAtTable(player);
+        table.sitAtTable(player2);
+
+        // check table state
+        table.checkTable();
+        // remove the table after finished
+        table.removeTable();
 
     }
 

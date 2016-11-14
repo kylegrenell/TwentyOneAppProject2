@@ -49,7 +49,7 @@ public class Deck {
     public void removeCards(){
         for (int i = 0; i < cards.size(); i++ )
         {
-            Log.d("Deck", cards.get(i).toString());
+            Log.v("Deck", cards.get(i).toString());
             // log.d is API for sending log output
         }
 

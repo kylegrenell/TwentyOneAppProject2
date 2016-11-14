@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.user.twentyone.TwentyOne.Player.State.PLAYING;
 
 /**
  * Created by user on 14/11/2016.
@@ -52,7 +51,7 @@ public class Player {
     // print hand to the log
     public void showHand() {
         for (int i = 0; i < hand.size(); i++) {
-            Log.d(name, hand.get(i).toString());
+            Log.v(name, hand.get(i).toString());
         }
     }
 
@@ -61,6 +60,6 @@ public class Player {
         return hand.size();
     }
 
-    
+
 
 }
