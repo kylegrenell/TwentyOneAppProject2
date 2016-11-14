@@ -19,9 +19,11 @@ public class Deck {
 
     // a deck made up of 4 suits and 13 ranks
     // call initialise method
+    // shuffle the deck
     public Deck() {
         cards = new ArrayList<Card>();
         initialiseDeck();
+        shuffle();
     }
 
 
@@ -53,5 +55,9 @@ public class Deck {
 
     }
 
+    // should deal the cards and then return
+    public Card dealCard(){
+        return cards.remove(0);
+    }
 
 }
