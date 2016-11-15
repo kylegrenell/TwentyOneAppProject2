@@ -3,6 +3,7 @@ package com.example.user.twentyone;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -68,14 +69,27 @@ public class MainActivity extends AppCompatActivity {
 
     // event handler for deal button
     public void buttonDeal(View view){
-//        Log.d("TwentyOne", "Deal button clicked!");
+        Log.d("TwentyOne", "Deal button clicked!");
         table.startNewGame();
         table.checkTable();
+
+        TextView playerText = (TextView)findViewById(R.id.player_result_text);
+        playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+
+        TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
+        dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
+
     }
 
 
-
-
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item){
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings){
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }
 
