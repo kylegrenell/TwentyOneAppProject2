@@ -16,7 +16,21 @@
         android:text="@string/welcome_text"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_row="1"
+        android:layour_column="1"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/playerValue"
+        android:layout_row="2"
+        android:layour_column="1"/>
+
 
     <Button
         android:id="@+id/button_hit"
@@ -24,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:onClick="buttonHit"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp" />
@@ -35,6 +50,9 @@
         android:layout_below="@+id/button_hit"
         android:layout_alignLeft="@+id/button_hit"
         android:layout_alignStart="@+id/button_hit"
-        android:id="@+id/button_stand" />
+        android:id="@+id/button_stand"
+        android:onClick="buttonStand"
+        />
+
 
 </RelativeLayout>

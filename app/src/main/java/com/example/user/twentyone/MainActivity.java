@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.user.twentyone.TwentyOne.Player;
 import com.example.user.twentyone.TwentyOne.Table;
@@ -27,11 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         // create table to play at
         table = new Table();
-
-        // add players to the table
+        // add player to the game
         player = new Player("kyle");
-
-        // add those players to the table
+        // add players to sit at the table
         table.sitAtTable(player);
 
 //        table.checkTable();
@@ -39,15 +38,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void buttonClicked(View view) {
+    // event handler for the HIT option
+    public void buttonHit(View view) {
         table.getCurrentPlayer().setAction(Player.Action.HIT);
-        Log.d("TwentyOne", "Deal button clicked!");
+        Log.d("TwentyOne", "Hit button clicked!");
         table.checkTable();
         table.clearTable();
 //        TextView textView = (TextView) findViewById(R.id.textView);
 //        Log.d("Main", "button clicked");
     }
+
+    // event handler for the HIT option
+    public void buttonStand(View view) {
+
+    }
+
 }
+
+
 
     //    @Override
 //        public boolean onCreateOptionsMenu(MenuItem item) {
