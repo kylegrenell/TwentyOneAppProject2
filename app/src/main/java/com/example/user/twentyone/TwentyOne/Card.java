@@ -9,7 +9,7 @@ public class Card {
     private Suit suit;
     private Rank rank;
 
-    public Card(int s, int r){
+    public Card(int s, int r) {
         suit = Suit.values()[s];
         rank = Rank.values()[r];
     }
@@ -21,12 +21,15 @@ public class Card {
 //        return value;
 //    }
 
-    public int getCardValue(){
-        if(suit.ordinal() < 9)
-        return suit.ordinal();
-        else
-            return 10;
+    public int getCardValue() {
+        if (rank.ordinal() < 9)
+            return rank.ordinal();
+        else if (rank.ordinal() == 13){
+            return 0;
     }
+         else
+            return 10;
+}
 
     @Override
     public String toString() {

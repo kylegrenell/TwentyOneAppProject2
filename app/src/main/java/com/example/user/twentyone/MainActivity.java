@@ -7,16 +7,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import com.example.user.twentyone.TwentyOne.Deck;
 import com.example.user.twentyone.TwentyOne.Player;
 import com.example.user.twentyone.TwentyOne.Table;
+
+import static android.R.attr.button;
 
 
 public class MainActivity extends AppCompatActivity {
 
     Player player;
     Table table;
+    Button mDealButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Main", "onCreate called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDealButton = (Button) findViewById(R.id.deal_button);
 
         // create table to play at
         table = new Table();
@@ -34,41 +40,37 @@ public class MainActivity extends AppCompatActivity {
         // add those players to the table
         table.sitAtTable(player);
 
-
-        //
-
-
-        // check table state
 //        table.checkTable();
-
-        // clear the table after finished
 //        table.clearTable();
 
     }
 
     public void buttonClicked(View view) {
-        player.
+        table.getCurrentPlayer().setAction(Player.Action.HIT);
+        Log.d("TwentyOne", "Deal button clicked!");
         table.checkTable();
         table.clearTable();
 //        TextView textView = (TextView) findViewById(R.id.textView);
 //        Log.d("Main", "button clicked");
     }
+}
 
-//    @Override
+    //    @Override
 //        public boolean onCreateOptionsMenu(MenuItem item) {
 //        getMenuInflater().inflate(R.menu.menu_main, menu);
 //        return true;
 //    }
-//
-//        @Override
-//        public boolean onOptionsItemSelected(MenuItem item){
+////
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
 //        int id = item.getItemId();
-//            if (id == R.id.action_settings);
-//            return true;
+//        if (id == R.id.action_settings) ;
+//        return true;
 //    }
+//
+//    return super.onOptionsItemSelected(item);
+//}
 
-
-}
 
 
 

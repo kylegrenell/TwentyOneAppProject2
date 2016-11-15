@@ -80,9 +80,11 @@ public class Player {
 
         int total = 0;
 
+//        total value of all other cards
         for(int i = 0; i < hand.size(); i++)
         total += hand.get(i).getCardValue();
-
+//        if total > 21 ace = 1 else ace = 10
+        // whatever aces are left add on
         return total;
 
     }

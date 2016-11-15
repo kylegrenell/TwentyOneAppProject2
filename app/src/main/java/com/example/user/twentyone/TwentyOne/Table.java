@@ -1,6 +1,7 @@
 package com.example.user.twentyone.TwentyOne;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -55,9 +56,10 @@ public class Table {
     // check the table state of each round . If it's a new game it will loop through, else it will
     // ask the players for their response. Once response given it goes back in and checks the loop
 
-    public void checkTable(int callPlayer) {
+    public void checkTable() {
 
-        switch (tableState) {
+        switch (tableState)
+        {
             case NEW_GAME: {
                 while (dealer.getCardCount() < 2) {
                     for (int i = 0; i < players.size(); i++)
@@ -82,7 +84,9 @@ public class Table {
 //                               checks if the current player is bust if not then increment++
                             if (players.get(currentPlayer).getHandValue() > 21) {
                                 players.get(currentPlayer).setState(Player.State.BUST);
-                                currentPlayer++;
+                            }
+                                else if(players.get(currentPlayer).getHandValue() == 21){
+                                    players.get(currentPlayer).setState(Player.State.STAND);
                             }
                         }
                         // check if the player stands or if we want to increment the current player by 1 (++)
@@ -90,9 +94,17 @@ public class Table {
                             players.get(currentPlayer).setState(Player.State.STAND);
                             currentPlayer++;
                         }
+
+                        else if(players.get(currentPlayer).getState() != Player.State.BUST) {
+                            currentPlayer++;
+                        }
+
                 }
                 if (currentPlayer > players.size() - 1)
                     tableState = RESOLVE;
+                // MISSING A BREAK HERE!
+                else
+                 break;
             }
 
 
@@ -105,19 +117,14 @@ public class Table {
         }
     }
 
-
-
-
         // take in the list of current players and output the table
 
         public void clearTable()
         {
             for (int i = 0; i < players.size(); i++)
             {
-                players.get(i).showHand();
+                Log.v(String.valueOf(i),String.valueOf(players.get(i).getHandValue() ) );
             }
-            dealer.showHand();
+            Log.v("Dealer",String.valueOf(dealer.getHandValue() ) );
         }
     }
-
-
