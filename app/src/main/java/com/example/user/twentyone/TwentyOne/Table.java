@@ -1,5 +1,7 @@
 package com.example.user.twentyone.TwentyOne;
 
+import android.os.AsyncTask;
+
 import java.util.ArrayList;
 
 /**
@@ -20,6 +22,7 @@ public class Table {
         RESOLVE
     }
 
+
     public Table(){
         tableState = State.NEW_GAME;
         players = new ArrayList<Player>();
@@ -37,6 +40,10 @@ public class Table {
         players.remove(player);
     }
 
+//    public void checkTable extends AsyncTask<void>(){
+//
+//    }
+
 
     // when start up a new game that will get everybody card and play first round
     // check the table state of each round . If it's a new game it will loop through, else it will
@@ -49,20 +56,25 @@ public class Table {
                         players.get(i).hit(deck.dealCard());
                 dealer.hit(deck.dealCard());
             }
-//            tableState = State.PLAYING;
             break;
             }
-//            ask player for an action
+
+//          state of Playing, ask players for an action
             case PLAYING:{
                 for(int i = 0; i < players.size(); i++){
 
                     while (players.get(i).getState() != Player.State.STAND ||
                             players.get(i).getState() != Player.State.BUST) {
 
+                        // needs to listen for an input - event listener
+
                         if (players.get(i).askAction() == Player.Action.HIT)
                             players.get(i).hit(deck.dealCard());
+
                         if (players.get(i).getHandValue() > 21)
                             players.get(i).setState(Player.State.BUST);
+
+                        players.get(i).setAction(Player.Action.WAITING);
                     }
                     if(players.get(i).askAction() == Player.Action.STAND)
                         players.get(i).setState(Player.State.STAND);

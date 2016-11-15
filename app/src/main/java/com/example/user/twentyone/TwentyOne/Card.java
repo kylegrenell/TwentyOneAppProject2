@@ -6,29 +6,6 @@ package com.example.user.twentyone.TwentyOne;
 
 public class Card {
 
-    private enum Suit{
-        SPADE,
-        HEART,
-        CLUB,
-        DIAMOND
-    }
-
-    private enum Rank{
-        TWO,
-        THREE,
-        FOUR,
-        FIVE,
-        SIX,
-        SEVEN,
-        EIGHT,
-        NINE,
-        TEN,
-        JACK,
-        QUEEN,
-        KING,
-        ACE
-    }
-
     private Suit suit;
     private Rank rank;
 
@@ -37,6 +14,13 @@ public class Card {
         rank = Rank.values()[r];
     }
 
+//    class example
+//    public int getValue() {
+//        int value = rank.ordinal() + 1;
+//        if (value > 10) value = 10;
+//        return value;
+//    }
+
     public int getCardValue(){
         if(suit.ordinal() < 9)
         return suit.ordinal();
@@ -44,11 +28,9 @@ public class Card {
             return 10;
     }
 
-
     @Override
-    public String toString(){
-        return suit + " " + rank;
+    public String toString() {
+        return rank + " of " + suit;
     }
-
 
 }

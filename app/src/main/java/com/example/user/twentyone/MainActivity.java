@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import com.example.user.twentyone.TwentyOne.Deck;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         // check table state
         table.checkTable();
+
         // clear the table after finished
         table.clearTable();
 
@@ -42,10 +44,24 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonClicked(View view) {
         player.setAction(Player.Action.HIT);
+//        table.checkTable();
         table.clearTable();
 //        TextView textView = (TextView) findViewById(R.id.textView);
 //        Log.d("Main", "button clicked");
     }
+
+//    @Override
+//        public boolean onCreateOptionsMenu(MenuItem item) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//        @Override
+//        public boolean onOptionsItemSelected(MenuItem item){
+//        int id = item.getItemId();
+//            if (id == R.id.action_settings);
+//            return true;
+//    }
 
 
 }
