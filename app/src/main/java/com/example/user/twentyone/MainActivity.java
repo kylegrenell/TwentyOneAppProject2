@@ -46,21 +46,30 @@ public class MainActivity extends AppCompatActivity {
 
     // event handler for the HIT option
     public void buttonHit(View view) {
-        table.getCurrentPlayer().setAction(Player.Action.HIT);
-        Log.d("TwentyOne", "Hit button clicked!");
-        table.checkTable();
-        table.clearTable();
+        try {
+            table.getCurrentPlayer().setAction(Player.Action.HIT);
+            Log.d("TwentyOne", "Hit button clicked!");
+            table.checkTable();
+            table.clearTable();
+
 //        display the hand text on the screen
-        TextView playerText = (TextView)findViewById(R.id.player_result_text);
-        playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+            TextView playerText = (TextView) findViewById(R.id.player_result_text);
+            playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
 
-        TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
-        dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
-
+            TextView dealerText = (TextView) findViewById(R.id.dealer_result_text);
+            dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
+        }
+        catch (Exception error)
+        {
+            Log.d("Hit error", error.getMessage());
+        }
     }
+// check table state to see if resolved and put winner
+
 
     // event handler for the STAND option
     public void buttonStand(View view) {
+        try {
         table.getCurrentPlayer().setAction(Player.Action.STAND);
         Log.d("TwentyOne", "Stand button clicked!");
         table.checkTable();
@@ -70,13 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
         dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
-
-
-//        table.clearTable();
     }
-
+    catch (Exception error)
+    {
+        Log.d("Hit error", error.getMessage());
+    }
+}
     // event handler for deal button
     public void buttonDeal(View view){
+        try {
         Log.d("TwentyOne", "Deal button clicked!");
         table.startNewGame();
         table.checkTable();
@@ -86,19 +97,12 @@ public class MainActivity extends AppCompatActivity {
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
         dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
-
     }
-
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item){
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings){
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
+        catch (Exception error)
+        {
+            Log.d("Hit error", error.getMessage());
+        }
+    }
 }
 
 

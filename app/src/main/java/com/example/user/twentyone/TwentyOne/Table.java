@@ -70,7 +70,8 @@ public class Table {
 
         switch (tableState) {
             case NEW_GAME: {
-
+                // players start at zero
+                currentPlayer = 0;
                 // reset each game - clear the hand of the previous cards in the loop
                 dealer.clearHand();
                 // debugged here, found that the game wasn't restting the state and so cards kept incrementing past 21,
@@ -87,7 +88,7 @@ public class Table {
 
                     dealer.hit(deck.dealCard());
                 }
-                currentPlayer = 0;
+
                 tableState = State.PLAYING;
                 break;
             }
@@ -105,18 +106,23 @@ public class Table {
                         //  checks if the current player is bust if not then increment++
                         if (players.get(currentPlayer).getHandValue() > 21) {
                             players.get(currentPlayer).setState(Player.State.BUST);
-                        } else if (players.get(currentPlayer).getHandValue() == 21) {
+                        }
+                        else if (players.get(currentPlayer).getHandValue() == 21) {
                             players.get(currentPlayer).setState(Player.State.STAND);
                         }
                     }
                     // check if the player stands or if we want to increment the current player by 1 (++)
-                    if (players.get(currentPlayer).askAction() == Player.Action.STAND) {
+                    if (players.get(currentPlayer).askAction() == Player.Action.STAND)
+                    {
                         players.get(currentPlayer).setState(Player.State.STAND);
                         currentPlayer++;
-                    } else if (players.get(currentPlayer).getState() != Player.State.BUST) {
+                    }
+                    else if (players.get(currentPlayer).getState() != Player.State.BUST)
+                    {
                         currentPlayer++;
                     }
-
+                    // action for the player to wait
+                    players.get(currentPlayer).setAction(Player.Action.WAIT);
                 }
                 //if the players hand is more than allowed hand size, resolve game
                 if (currentPlayer > players.size() - 1)

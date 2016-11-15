@@ -37,7 +37,8 @@ public class Player {
     // get current actions
     public enum Action{
         HIT,
-        STAND
+        STAND,
+        WAIT
     }
 
 
