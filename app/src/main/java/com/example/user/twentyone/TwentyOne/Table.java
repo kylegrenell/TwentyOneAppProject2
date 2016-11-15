@@ -68,14 +68,17 @@ public class Table {
 
     public void checkTable() {
 
-        switch (tableState)
-        {
+        switch (tableState) {
             case NEW_GAME: {
 
                 // reset each game - clear the hand of the previous cards in the loop
                 dealer.clearHand();
-                for (int i = 0; i < players.size(); i++)
+                // debugged here, found that the game wasn't restting the state and so cards kept incrementing past 21,
+                // added the below
+                for (int i = 0; i < players.size(); i++) {
+                    players.get(i).setState(Player.State.PLAYING);
                     players.get(i).clearHand();
+                }
 
                 while (dealer.getCardCount() < 2) {
 
@@ -86,54 +89,89 @@ public class Table {
                 }
                 currentPlayer = 0;
                 tableState = State.PLAYING;
+                break;
             }
 
 //          state of Playing, ask players for an action
             case PLAYING: {
 
-                    if (players.get(currentPlayer).getState() != Player.State.STAND ||
-                            players.get(currentPlayer).getState() != Player.State.BUST) {
+                if (players.get(currentPlayer).getState() != Player.State.STAND ||
+                        players.get(currentPlayer).getState() != Player.State.BUST) {
 
-                        // loops for action to see if it's hit, bust or stand
-                        if (players.get(currentPlayer).askAction() == Player.Action.HIT) {
-                            players.get(currentPlayer).hit(deck.dealCard());
+                    // loops for action to see if it's hit, bust or stand
+                    if (players.get(currentPlayer).askAction() == Player.Action.HIT) {
+                        players.get(currentPlayer).hit(deck.dealCard());
 
-//                               checks if the current player is bust if not then increment++
-                            if (players.get(currentPlayer).getHandValue() > 21) {
-                                players.get(currentPlayer).setState(Player.State.BUST);
-                            }
-                                else if(players.get(currentPlayer).getHandValue() == 21){
-                                    players.get(currentPlayer).setState(Player.State.STAND);
-                            }
-                        }
-                        // check if the player stands or if we want to increment the current player by 1 (++)
-                        if (players.get(currentPlayer).askAction() == Player.Action.STAND) {
+                        //  checks if the current player is bust if not then increment++
+                        if (players.get(currentPlayer).getHandValue() > 21) {
+                            players.get(currentPlayer).setState(Player.State.BUST);
+                        } else if (players.get(currentPlayer).getHandValue() == 21) {
                             players.get(currentPlayer).setState(Player.State.STAND);
-                            currentPlayer++;
                         }
-
-                        else if(players.get(currentPlayer).getState() != Player.State.BUST) {
-                            currentPlayer++;
-                        }
+                    }
+                    // check if the player stands or if we want to increment the current player by 1 (++)
+                    if (players.get(currentPlayer).askAction() == Player.Action.STAND) {
+                        players.get(currentPlayer).setState(Player.State.STAND);
+                        currentPlayer++;
+                    } else if (players.get(currentPlayer).getState() != Player.State.BUST) {
+                        currentPlayer++;
+                    }
 
                 }
+                //if the players hand is more than allowed hand size, resolve game
                 if (currentPlayer > players.size() - 1)
                     tableState = RESOLVE;
-                // MISSING A BREAK HERE! took forever to debug
+                    // MISSING A BREAK HERE! took forever to debug
                 else
-                 break;
+                    break;
             }
 
-
-            case RESOLVE: {
+            case RESOLVE:
+            {
+                // if the dealer is less than 17 they have to draw a card, hit deck...
                 while (dealer.getHandValue() < 17)
                     dealer.hit(deck.dealCard());
-                // show winner result
+
+                /////// show winner result ////////
+
+                if (dealer.getState() == Player.State.BUST) {
+                    for (int i = 0; i < players.size(); i++) {
+                        if (players.get(i).getState() != Player.State.BUST) {
+                            players.get(i).setState(Player.State.WON);
+                        }
+                    }
+                }
+                else
+                {
+
+                    for (int i = 0; i < players.size(); i++) {
+                        // check if the players is not (!=) bust
+                        if (players.get(i).getState() != Player.State.BUST) {
+
+                            // if not bust then check these things...
+                            // so if a players hand value is more or less than dealers, the state of play should be
+                            // passed in to the loop
+                            // if the players hand value is less than the dealers hand player LOST
+                            // else WON
+
+                            // Lost < less than dealer but not bust
+                            if (players.get(i).getHandValue() < dealer.getHandValue())
+                                players.get(i).setState(Player.State.LOST);
+                            // won > more than dealer but not bust
+                            if (players.get(i).getHandValue() < dealer.getHandValue())
+                                players.get(i).setState(Player.State.WON);
+                            // drawn / pushed - their stake is returned to them and they neither win nor lose
+                            if (players.get(i).getHandValue() == dealer.getHandValue())
+                                players.get(i).setState(Player.State.PUSH);
+                        }
+                    }
+                }
             }
             default:
                 break;
         }
     }
+
 
 
     public void startNewGame(){

@@ -28,6 +28,8 @@ public class Player {
     public enum State{
         PLAYING,
         WON,
+        LOST,
+        PUSH,
         BUST,
         STAND
     }
@@ -87,6 +89,7 @@ public class Player {
             Log.v(this.name, hand.get(i).toString());
         }
     }
+
 
     //get the value of the cards in hand
     public int getHandValue(){

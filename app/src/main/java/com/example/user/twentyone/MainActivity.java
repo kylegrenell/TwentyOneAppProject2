@@ -51,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
         table.checkTable();
         table.clearTable();
 //        display the hand text on the screen
-//        TextView playerText = (TextView)findViewById(R.id.player_result_text);
-//        playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
-//
-//        TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
-//        dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
+        TextView playerText = (TextView)findViewById(R.id.player_result_text);
+        playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+
+        TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
+        dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
 
     }
 
@@ -63,7 +63,15 @@ public class MainActivity extends AppCompatActivity {
     public void buttonStand(View view) {
         table.getCurrentPlayer().setAction(Player.Action.STAND);
         Log.d("TwentyOne", "Stand button clicked!");
-//        table.checkTable();
+        table.checkTable();
+
+        TextView playerText = (TextView)findViewById(R.id.player_result_text);
+        playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+
+        TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
+        dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
+
+
 //        table.clearTable();
     }
 
