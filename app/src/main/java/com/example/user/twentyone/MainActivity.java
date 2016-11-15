@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     Player player;
     Table table;
-    Button mDealButton;
+//    Button mDealButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDealButton = (Button) findViewById(R.id.button_hit);
+//        mDealButton = (Button) findViewById(R.id.button_hit);
 
         // create table to play at
         table = new Table();
@@ -32,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
         player = new Player("kyle");
         // add players to sit at the table
         table.sitAtTable(player);
-
+        table.clearTable();
 //        table.checkTable();
-//        table.clearTable();
 
     }
 
@@ -44,34 +43,18 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TwentyOne", "Hit button clicked!");
         table.checkTable();
         table.clearTable();
-//        TextView textView = (TextView) findViewById(R.id.textView);
-//        Log.d("Main", "button clicked");
     }
 
-    // event handler for the HIT option
+    // event handler for the STAND option
     public void buttonStand(View view) {
-
+        table.getCurrentPlayer().setAction(Player.Action.STAND);
+        Log.d("TwentyOne", "Stand button clicked!");
+        table.checkTable();
+        table.clearTable();
     }
 
 }
 
-
-
-    //    @Override
-//        public boolean onCreateOptionsMenu(MenuItem item) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-////
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) ;
-//        return true;
-//    }
-//
-//    return super.onOptionsItemSelected(item);
-//}
 
 
 
