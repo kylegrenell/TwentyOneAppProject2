@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TwentyOne", "Hit button clicked!");
         table.checkTable();
         table.clearTable();
+//        display the hand text on the screen
+        TextView textView = (TextView)findViewById(R.id.textView);
+        textView.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
     }
 
     // event handler for the STAND option

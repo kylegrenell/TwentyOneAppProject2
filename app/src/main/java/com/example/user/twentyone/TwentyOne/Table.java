@@ -51,6 +51,11 @@ public class Table {
         return players.get(currentPlayer);
     }
 
+//    getter for the dealer
+    public int getDealerHand(){
+        return dealer.getHandValue();
+    }
+
 
     // when start up a new game that will get everybody card and play first round
     // check the table state of each round . If it's a new game it will loop through, else it will
