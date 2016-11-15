@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonClicked(View view) {
+        player.
         table.checkTable();
         table.clearTable();
 //        TextView textView = (TextView) findViewById(R.id.textView);

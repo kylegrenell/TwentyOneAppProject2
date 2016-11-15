@@ -45,6 +45,11 @@ public class Table {
         players.remove(player);
     }
 
+    // getter for current player
+    public Player getCurrentPlayer(){
+        return players.get(currentPlayer);
+    }
+
 
     // when start up a new game that will get everybody card and play first round
     // check the table state of each round . If it's a new game it will loop through, else it will
@@ -60,32 +65,31 @@ public class Table {
 
                     dealer.hit(deck.dealCard());
                 }
+                currentPlayer = 0;
                 tableState = State.PLAYING;
             }
 
 //          state of Playing, ask players for an action
             case PLAYING: {
-                currentPlayer = 0;
-                if (currentPlayer == callPlayer) {
 
-                    if (players.get(callPlayer).getState() != Player.State.STAND ||
-                            players.get(callPlayer).getState() != Player.State.BUST) {
+                    if (players.get(currentPlayer).getState() != Player.State.STAND ||
+                            players.get(currentPlayer).getState() != Player.State.BUST) {
+
                         // loops for action to see if it's hit, bust or stand
-                        if (players.get(callPlayer).askAction() == Player.Action.HIT) {
-                            players.get(callPlayer).hit(deck.dealCard());
+                        if (players.get(currentPlayer).askAction() == Player.Action.HIT) {
+                            players.get(currentPlayer).hit(deck.dealCard());
 
 //                               checks if the current player is bust if not then increment++
-                            if (players.get(callPlayer).getHandValue() > 21) {
-                                players.get(callPlayer).setState(Player.State.BUST);
+                            if (players.get(currentPlayer).getHandValue() > 21) {
+                                players.get(currentPlayer).setState(Player.State.BUST);
                                 currentPlayer++;
                             }
                         }
                         // check if the player stands or if we want to increment the current player by 1 (++)
-                        if (players.get(callPlayer).askAction() == Player.Action.STAND) {
-                            players.get(callPlayer).setState(Player.State.STAND);
+                        if (players.get(currentPlayer).askAction() == Player.Action.STAND) {
+                            players.get(currentPlayer).setState(Player.State.STAND);
                             currentPlayer++;
                         }
-                    }
                 }
                 if (currentPlayer > players.size() - 1)
                     tableState = RESOLVE;
