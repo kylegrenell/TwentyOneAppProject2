@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public void buttonDeal(View view){
         try {
         Log.d("TwentyOne", "Deal button clicked!");
-        table.startNewGame();
+        if(table.startNewGame())
         table.checkTable();
 
         TextView playerText = (TextView)findViewById(R.id.player_result_text);

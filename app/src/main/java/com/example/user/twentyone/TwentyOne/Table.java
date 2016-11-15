@@ -21,7 +21,7 @@ public class Table {
     int currentPlayer;
 
 
-    public enum State{
+    public enum State {
         NEW_GAME,
         PLAYING,
         PAUSE,
@@ -29,7 +29,7 @@ public class Table {
     }
 
 
-    public Table(){
+    public Table() {
         tableState = NEW_GAME;
         players = new ArrayList<Player>();
         dealer = new Player("Dealer");
@@ -37,27 +37,27 @@ public class Table {
     }
 
     // player can join table
-    public void sitAtTable(Player player){
+    public void sitAtTable(Player player) {
         players.add(player);
     }
 
     // can leave the table
-    public void leaveTable(Player player){
+    public void leaveTable(Player player) {
         players.remove(player);
     }
 
 
     // getter for current player
-    public Player getCurrentPlayer(){
-        if(currentPlayer > players.size() -1)
-        return players.get(currentPlayer - 1);
+    public Player getCurrentPlayer() {
+        if (currentPlayer > players.size() - 1)
+            return players.get(currentPlayer - 1);
         else
             return players.get(currentPlayer);
     }
 
 
-//    getter for the dealer
-    public Player getDealer(){
+    //    getter for the dealer
+    public Player getDealer() {
         return dealer;
     }
 
@@ -72,6 +72,8 @@ public class Table {
             case NEW_GAME: {
                 // players start at zero
                 currentPlayer = 0;
+                //initialise the deck
+                deck.initialiseDeck();
                 // reset each game - clear the hand of the previous cards in the loop
                 dealer.clearHand();
                 // debugged here, found that the game wasn't restting the state and so cards kept incrementing past 21,
@@ -106,23 +108,24 @@ public class Table {
                         //  checks if the current player is bust if not then increment++
                         if (players.get(currentPlayer).getHandValue() > 21) {
                             players.get(currentPlayer).setState(Player.State.BUST);
-                        }
-                        else if (players.get(currentPlayer).getHandValue() == 21) {
+                        } else if (players.get(currentPlayer).getHandValue() == 21) {
                             players.get(currentPlayer).setState(Player.State.STAND);
                         }
                     }
+
                     // check if the player stands or if we want to increment the current player by 1 (++)
-                    if (players.get(currentPlayer).askAction() == Player.Action.STAND)
-                    {
+                    if (players.get(currentPlayer).askAction() == Player.Action.STAND) {
                         players.get(currentPlayer).setState(Player.State.STAND);
+                        players.get(currentPlayer).setAction(Player.Action.WAIT);
                         currentPlayer++;
-                    }
-                    else if (players.get(currentPlayer).getState() != Player.State.BUST)
+                    } else if (players.get(currentPlayer).getState() != Player.State.BUST)
+
                     {
+                        // action for the player to wait
+                        players.get(currentPlayer).setAction(Player.Action.WAIT);
                         currentPlayer++;
                     }
-                    // action for the player to wait
-                    players.get(currentPlayer).setAction(Player.Action.WAIT);
+
                 }
                 //if the players hand is more than allowed hand size, resolve game
                 if (currentPlayer > players.size() - 1)
@@ -132,8 +135,7 @@ public class Table {
                     break;
             }
 
-            case RESOLVE:
-            {
+            case RESOLVE: {
                 // if the dealer is less than 17 they have to draw a card, hit deck...
                 while (dealer.getHandValue() < 17)
                     dealer.hit(deck.dealCard());
@@ -146,9 +148,7 @@ public class Table {
                             players.get(i).setState(Player.State.WON);
                         }
                     }
-                }
-                else
-                {
+                } else {
 
                     for (int i = 0; i < players.size(); i++) {
                         // check if the players is not (!=) bust
@@ -179,12 +179,12 @@ public class Table {
     }
 
 
-
-    public void startNewGame(){
+    public boolean startNewGame() {
         // if table state does not equal state not playing then table state equals new game
-        if(tableState != State.PLAYING)
-        tableState = State.NEW_GAME;
-    }
+        if (tableState != State.PLAYING)
+            tableState = State.NEW_GAME;
+    return true;
+}
 
 
         // take in the list of current players and output the table

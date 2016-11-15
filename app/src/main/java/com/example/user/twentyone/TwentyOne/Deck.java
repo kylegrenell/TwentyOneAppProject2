@@ -21,14 +21,14 @@ public class Deck {
     // call initialise method
     // shuffle the deck
     public Deck() {
-        cards = new ArrayList<Card>();
         initialiseDeck();
-        shuffle();
     }
 
 
     // initialise the array***********************************************
-    private void initialiseDeck() {
+    public void initialiseDeck() {
+
+        cards = new ArrayList<Card>();
 
         int count = 0;
         for (int s = 0; s < 4; s++) {
@@ -38,6 +38,7 @@ public class Deck {
             }
             count++;
         }
+        shuffle();
     }
 
 
