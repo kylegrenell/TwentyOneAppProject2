@@ -11,11 +11,14 @@ import com.example.user.twentyone.TwentyOne.Player;
 import com.example.user.twentyone.TwentyOne.Table;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
     Player player;
     Table table;
-//    Button mDealButton;
+    TextView mPlayerResultText;
+    TextView mDealerResultText;
+    Button mbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        mPlayerResultText = (TextView) findViewById(R.id.player_result_text);
+//        mDealerResultText = (TextView) findViewById(R.id.dealer_result_text);
 //        mDealButton = (Button) findViewById(R.id.button_hit);
 
         // create table to play at
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         player = new Player("kyle");
         // add players to sit at the table
         table.sitAtTable(player);
+
         table.clearTable();
 //        table.checkTable();
 
@@ -44,17 +50,32 @@ public class MainActivity extends AppCompatActivity {
         table.checkTable();
         table.clearTable();
 //        display the hand text on the screen
-        TextView textView = (TextView)findViewById(R.id.textView);
-        textView.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+//        TextView playerText = (TextView)findViewById(R.id.player_result_text);
+//        playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+//
+//        TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
+//        dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
+
     }
 
     // event handler for the STAND option
     public void buttonStand(View view) {
         table.getCurrentPlayer().setAction(Player.Action.STAND);
         Log.d("TwentyOne", "Stand button clicked!");
-        table.checkTable();
-        table.clearTable();
+//        table.checkTable();
+//        table.clearTable();
     }
+
+    // event handler for deal button
+    public void buttonDeal(View view){
+//        Log.d("TwentyOne", "Deal button clicked!");
+        table.startNewGame();
+        table.checkTable();
+    }
+
+
+
+
 
 }
 

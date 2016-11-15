@@ -4,4 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="hit">HIT</string>
     <string name="stand">STAND</string>
+    <string name="dealer_result_text"></string>
+    <string name="player_result_text"></string>
+
 </resources>

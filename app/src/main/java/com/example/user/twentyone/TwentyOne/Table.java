@@ -46,14 +46,19 @@ public class Table {
         players.remove(player);
     }
 
+
     // getter for current player
     public Player getCurrentPlayer(){
-        return players.get(currentPlayer);
+        if(currentPlayer > players.size() -1)
+        return players.get(currentPlayer - 1);
+        else
+            return players.get(currentPlayer);
     }
 
+
 //    getter for the dealer
-    public int getDealerHand(){
-        return dealer.getHandValue();
+    public Player getDealer(){
+        return dealer;
     }
 
 
@@ -66,7 +71,14 @@ public class Table {
         switch (tableState)
         {
             case NEW_GAME: {
+
+                // reset each game - clear the hand of the previous cards in the loop
+                dealer.clearHand();
+                for (int i = 0; i < players.size(); i++)
+                    players.get(i).clearHand();
+
                 while (dealer.getCardCount() < 2) {
+
                     for (int i = 0; i < players.size(); i++)
                         players.get(i).hit(deck.dealCard());
 
@@ -122,6 +134,14 @@ public class Table {
                 break;
         }
     }
+
+
+    public void startNewGame(){
+        // if table state does not equal state not playing then table state equals new game
+        if(tableState != State.PLAYING)
+        tableState = State.NEW_GAME;
+    }
+
 
         // take in the list of current players and output the table
 

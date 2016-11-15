@@ -38,35 +38,48 @@ public class Player {
         STAND
     }
 
+
     // what action does the player want to do ie wait, hit or stand
     public Action askAction(){
         return currentAction;
     }
+
 
     // setter for the action enum
     public void setAction(Action action){
         currentAction = action;
     }
 
+
     // hits and then returns a card to the hand
     public void hit(Card card){
         hand.add(card);
     }
+
 
     //Stand won't ask player to hit (end their turn)
     public void stand(){
         playerGameState = State.STAND;
     }
 
+
     // getter for state of the player in the game
     public State getState(){
         return playerGameState;
     }
 
+
     // setter for state (ie can do... can't do...)
     public void setState(State state){
         playerGameState = state;
     }
+
+
+    // clear the players hand
+    public void clearHand(){
+        hand.clear();
+    }
+
 
     // print hand to the log
     public void showHand() {
