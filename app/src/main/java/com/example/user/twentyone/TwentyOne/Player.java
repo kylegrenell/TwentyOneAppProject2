@@ -18,13 +18,12 @@ public class Player {
     private Action currentAction;
 
     public Player(String name) {
-        name = name;
-        hand = new ArrayList<Card>();
+        this.name = name;
+        this.hand = new ArrayList<Card>();
         // has a hand with no cards because they're not yet dealt
         playerGameState = State.PLAYING;
         // game state is that they're starting the game (PLAYING)
     }
-
 
     public enum State{
         PLAYING,
@@ -33,20 +32,18 @@ public class Player {
         STAND
     }
 
-
     // get current actions
     public enum Action{
-        WAITING,
         HIT,
         STAND
     }
 
-    //
+    // what action does the player want to do ie wait, hit or stand
     public Action askAction(){
         return currentAction;
     }
 
-    // setter
+    // setter for the action enum
     public void setAction(Action action){
         currentAction = action;
     }
@@ -56,26 +53,25 @@ public class Player {
         hand.add(card);
     }
 
-    //Stand won't ask player to hit
+    //Stand won't ask player to hit (end their turn)
     public void stand(){
         playerGameState = State.STAND;
     }
 
-
+    // getter for state of the player in the game
     public State getState(){
         return playerGameState;
     }
 
-    // getter for state (ie can do... can't do...)
+    // setter for state (ie can do... can't do...)
     public void setState(State state){
         playerGameState = state;
     }
 
-
     // print hand to the log
     public void showHand() {
         for (int i = 0; i < hand.size(); i++) {
-            Log.v(name, hand.get(i).toString());
+            Log.v(this.name, hand.get(i).toString());
         }
     }
 
@@ -91,12 +87,9 @@ public class Player {
 
     }
 
-
     // getter for card count
     public int getCardCount(){
         return hand.size();
     }
-
-
 
 }

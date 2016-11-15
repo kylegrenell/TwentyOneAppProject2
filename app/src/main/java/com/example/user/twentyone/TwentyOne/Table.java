@@ -4,6 +4,9 @@ import android.os.AsyncTask;
 
 import java.util.ArrayList;
 
+import static com.example.user.twentyone.TwentyOne.Table.State.NEW_GAME;
+import static com.example.user.twentyone.TwentyOne.Table.State.RESOLVE;
+
 /**
  * Created by user on 14/11/2016.
  */
@@ -14,8 +17,10 @@ public class Table {
     Player dealer;
     Deck deck;
     State tableState;
+    int currentPlayer;
 
-    private enum State{
+
+    public enum State{
         NEW_GAME,
         PLAYING,
         PAUSE,
@@ -24,7 +29,7 @@ public class Table {
 
 
     public Table(){
-        tableState = State.NEW_GAME;
+        tableState = NEW_GAME;
         players = new ArrayList<Player>();
         dealer = new Player("Dealer");
         deck = new Deck();
@@ -40,50 +45,56 @@ public class Table {
         players.remove(player);
     }
 
-//    public void checkTable extends AsyncTask<void>(){
-//
-//    }
-
 
     // when start up a new game that will get everybody card and play first round
     // check the table state of each round . If it's a new game it will loop through, else it will
     // ask the players for their response. Once response given it goes back in and checks the loop
-    public void checkTable(){
-        switch(tableState){
+
+    public void checkTable(int callPlayer) {
+
+        switch (tableState) {
             case NEW_GAME: {
                 while (dealer.getCardCount() < 2) {
                     for (int i = 0; i < players.size(); i++)
                         players.get(i).hit(deck.dealCard());
-                dealer.hit(deck.dealCard());
-            }
-            break;
+
+                    dealer.hit(deck.dealCard());
+                }
+                tableState = State.PLAYING;
             }
 
 //          state of Playing, ask players for an action
-            case PLAYING:{
-                for(int i = 0; i < players.size(); i++){
+            case PLAYING: {
+                currentPlayer = 0;
+                if (currentPlayer == callPlayer) {
 
-                    while (players.get(i).getState() != Player.State.STAND ||
-                            players.get(i).getState() != Player.State.BUST) {
+                    if (players.get(callPlayer).getState() != Player.State.STAND ||
+                            players.get(callPlayer).getState() != Player.State.BUST) {
+                        // loops for action to see if it's hit, bust or stand
+                        if (players.get(callPlayer).askAction() == Player.Action.HIT) {
+                            players.get(callPlayer).hit(deck.dealCard());
 
-                        // needs to listen for an input - event listener
-
-                        if (players.get(i).askAction() == Player.Action.HIT)
-                            players.get(i).hit(deck.dealCard());
-
-                        if (players.get(i).getHandValue() > 21)
-                            players.get(i).setState(Player.State.BUST);
-
-                        players.get(i).setAction(Player.Action.WAITING);
+//                               checks if the current player is bust if not then increment++
+                            if (players.get(callPlayer).getHandValue() > 21) {
+                                players.get(callPlayer).setState(Player.State.BUST);
+                                currentPlayer++;
+                            }
+                        }
+                        // check if the player stands or if we want to increment the current player by 1 (++)
+                        if (players.get(callPlayer).askAction() == Player.Action.STAND) {
+                            players.get(callPlayer).setState(Player.State.STAND);
+                            currentPlayer++;
+                        }
                     }
-                    if(players.get(i).askAction() == Player.Action.STAND)
-                        players.get(i).setState(Player.State.STAND);
                 }
-                while(dealer.getHandValue() < 17)
-                    dealer.hit(deck.dealCard());
+                if (currentPlayer > players.size() - 1)
+                    tableState = RESOLVE;
+            }
 
-                tableState = State.RESOLVE;
-                break;
+
+            case RESOLVE: {
+                while (dealer.getHandValue() < 17)
+                    dealer.hit(deck.dealCard());
             }
             default:
                 break;
@@ -92,14 +103,17 @@ public class Table {
 
 
 
-    // take in the list of current players and output the table
-    public void clearTable(){
-        for(int i = 0; i < players.size(); i++){
-            players.get(i).showHand();
+
+        // take in the list of current players and output the table
+
+        public void clearTable()
+        {
+            for (int i = 0; i < players.size(); i++)
+            {
+                players.get(i).showHand();
             }
-        dealer.showHand();
+            dealer.showHand();
         }
     }
-
 
 

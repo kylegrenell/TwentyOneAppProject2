@@ -34,17 +34,20 @@ public class MainActivity extends AppCompatActivity {
         // add those players to the table
         table.sitAtTable(player);
 
+
+        //
+
+
         // check table state
-        table.checkTable();
+//        table.checkTable();
 
         // clear the table after finished
-        table.clearTable();
+//        table.clearTable();
 
     }
 
     public void buttonClicked(View view) {
-        player.setAction(Player.Action.HIT);
-//        table.checkTable();
+        table.checkTable();
         table.clearTable();
 //        TextView textView = (TextView) findViewById(R.id.textView);
 //        Log.d("Main", "button clicked");

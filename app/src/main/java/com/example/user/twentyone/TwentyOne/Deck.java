@@ -51,8 +51,8 @@ public class Deck {
         {
             Log.v("Deck", cards.get(i).toString());
             // log.d is API for sending log output
+            // what's the difference with log.v?
         }
-
     }
 
     // should deal the cards and then return
