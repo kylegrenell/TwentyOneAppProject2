@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TwentyOne</string>
-    <string name="hello_world">Play Twenty One</string>
+    <string name="welcome_text">Welcome to the table</string>
     <string name="action_settings">Settings</string>
-    <string name="deal_button">Deal</string>
+    <string name="hit">HIT</string>
+    <string name="stand">STAND</string>
 </resources>

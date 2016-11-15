@@ -1,19 +1,13 @@
 package com.example.user.twentyone;
 
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import com.example.user.twentyone.TwentyOne.Deck;
+
 import com.example.user.twentyone.TwentyOne.Player;
 import com.example.user.twentyone.TwentyOne.Table;
-
-import static android.R.attr.button;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDealButton = (Button) findViewById(R.id.deal_button);
+        mDealButton = (Button) findViewById(R.id.button_hit);
 
         // create table to play at
         table = new Table();

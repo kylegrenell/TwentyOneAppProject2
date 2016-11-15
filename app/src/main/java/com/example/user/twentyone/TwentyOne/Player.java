@@ -79,12 +79,24 @@ public class Player {
     public int getHandValue(){
 
         int total = 0;
+        int aceCount = 0;
 
 //        total value of all other cards
         for(int i = 0; i < hand.size(); i++)
+            if(hand.get(i).getCardValue() != 13)
         total += hand.get(i).getCardValue();
 //        if total > 21 ace = 1 else ace = 10
-        // whatever aces are left add on
+            else
+            aceCount++;
+            // calculates the amount of aces and adds them up
+
+        for(int i = 0; i < aceCount; i++)
+        {
+            total += 10; // for the first ace if it is equal to 10 counted as a high
+            if(total > 21) // without the ace
+            total -= 9; // check total, if over 21 takes away 9 from the ace
+           // so first ace comes in and takes you over 21, it takes value down to 1 as a low ace
+        }
         return total;
 
     }

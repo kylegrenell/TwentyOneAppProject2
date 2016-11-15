@@ -14,6 +14,14 @@ public class Card {
         rank = Rank.values()[r];
     }
 
+
+
+
+
+
+
+
+
 //    class example
 //    public int getValue() {
 //        int value = rank.ordinal() + 1;
@@ -28,7 +36,7 @@ public class Card {
             return 0;
     }
          else
-            return 10;
+            return 13;
 }
 
     @Override

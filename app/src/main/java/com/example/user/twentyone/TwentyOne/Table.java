@@ -102,7 +102,7 @@ public class Table {
                 }
                 if (currentPlayer > players.size() - 1)
                     tableState = RESOLVE;
-                // MISSING A BREAK HERE!
+                // MISSING A BREAK HERE! took forever to debug
                 else
                  break;
             }
@@ -111,6 +111,7 @@ public class Table {
             case RESOLVE: {
                 while (dealer.getHandValue() < 17)
                     dealer.hit(deck.dealCard());
+                // show winner result
             }
             default:
                 break;
