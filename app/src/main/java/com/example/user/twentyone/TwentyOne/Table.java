@@ -111,25 +111,28 @@ public class Table {
 
                 Player currentPlayer = players.get(currentPlayerIndex);
                 Player.State currentState =  currentPlayer.getState();
+                // loops for action to see if it's hit, bust or stand
+                //  checks if the current player is bust if not then increment++
 
                 if (currentState != Player.State.STAND ||
                         currentState != Player.State.BUST) {
-                    // loops for action to see if it's hit, bust or stand
+
                     if (players.get(currentPlayerIndex).askAction() == Player.Action.HIT) {
                         players.get(currentPlayerIndex).hit(deck.dealCard());
-                        //  checks if the current player is bust if not then increment++
+
                         if (players.get(currentPlayerIndex).getHandValue() > 21) {
                             players.get(currentPlayerIndex).setState(Player.State.BUST);
+
                         } else if (players.get(currentPlayerIndex).getHandValue() == 21) {
                             players.get(currentPlayerIndex).setState(Player.State.STAND);
                         }
                     }
-                    // check if the player stands or if we want to increment the current player by 1 (++)
+                    // check if the player stands, else increment the current player by 1 (++)
                     if (players.get(currentPlayerIndex).askAction() == Player.Action.STAND) {
                         players.get(currentPlayerIndex).setState(Player.State.STAND);
                         players.get(currentPlayerIndex).setAction(Player.Action.WAIT);
                         currentPlayerIndex++;
-                    } else if (players.get(currentPlayerIndex).getState() != Player.State.BUST)
+                    } else if (currentState != Player.State.BUST)
                     {
                         players.get(currentPlayerIndex).setAction(Player.Action.WAIT);
                         currentPlayerIndex++; // action for the player to wait
@@ -141,16 +144,12 @@ public class Table {
                     break; // MISSING A BREAK HERE! took forever to debug
             }
 
-
             case RESOLVE: {
+
                 // if the dealer is less than 17 they have to draw a card, hit deck...
                 while (dealer.getHandValue() < 17)
                     dealer.hit(deck.dealCard());
-
-
-
-                /////// show winner result ////////
-//                    if dealer busts that resolves the game
+                /////// show winner result - if dealer busts that resolves the game ////////
                 if (dealer.getState() == Player.State.BUST) {
                     for (int i = 0; i < players.size(); i++) {
                         if (players.get(i).getState() != Player.State.BUST) {
@@ -158,24 +157,16 @@ public class Table {
                         }
                     }
                 }
-                else
-                {
-                    // if not bust then check these things...
-                    // so if a players hand value is more or less than dealers, pass the state of play into loop
-                    // if the players hand value is less than the dealers hand player Lose, else Win
-                    // check if the players is not (!=) bust
+                else {
+                    // if not bust then check if a players hand value is more/less than dealers, pass the state of play in
+                    // Check if the player is not (!=) bust. If hand value is less than dealers hand player Lose, else Win.
 
                     for (int i = 0; i < players.size(); i++) {
-
                         if (players.get(i).getState() != Player.State.BUST) {
-
-                            // Lost < less than dealer but not bust
                             if (players.get(i).getHandValue() < dealer.getHandValue())
                                 players.get(i).setState(Player.State.LOST);
-                            // won > more than dealer but not bust
                             if (players.get(i).getHandValue() < dealer.getHandValue())
                                 players.get(i).setState(Player.State.WON);
-                            // drawn / pushed - their stake is returned to them and they neither win nor lose
                             if (players.get(i).getHandValue() == dealer.getHandValue())
                                 players.get(i).setState(Player.State.PUSH);
                         }
