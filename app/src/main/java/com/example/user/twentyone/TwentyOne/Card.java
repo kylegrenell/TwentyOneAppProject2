@@ -6,34 +6,25 @@ package com.example.user.twentyone.TwentyOne;
 
 public class Card {
 
-    private Suit suit;
     private Rank rank;
+    private Suit suit;
 
     public Card(int s, int r) {
-        suit = Suit.values()[s];
-        rank = Rank.values()[r];
+        this.rank = rank.values()[r];
+        this.suit = suit.values()[s];
     }
 
-//
-//    public int getCardValue() {
-//        int value = rank.ordinal() + 1;
-//        if (value > 10) value = 10;
-//        return value;
-//    }
-
+    // this should make the face cards 11-12 the value of 10
     public int getCardValue() {
-        if (rank.ordinal() < 9)
-            return rank.ordinal();
-        else if (rank.ordinal() == 13){
-            return 0;
+        int value = rank.ordinal() + 1;
+        if (value > 10) value = 10;
+        return value;
     }
-         else
-            return 13;
-}
 
     @Override
     public String toString() {
         return rank + " of " + suit;
     }
-
 }
+
+

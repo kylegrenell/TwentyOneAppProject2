@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">TwentyOne</string>
-    <string name="welcome_text">Welcome to the table</string>
+    <string name="app_name">CrapJack</string>
+    <string name="welcome_text">Where the player always wins...</string>
     <string name="action_settings">Settings</string>
     <string name="hit">HIT</string>
     <string name="stand">STAND</string>
     <string name="dealer_result_text"></string>
     <string name="player_result_text"></string>
-    <string name="result_text"></string>
+    <string name="result"></string>
 </resources>
