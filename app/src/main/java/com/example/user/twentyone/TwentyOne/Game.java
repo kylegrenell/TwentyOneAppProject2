@@ -100,7 +100,7 @@ public class Game {
 
                 Player currentPlayer = players.get(currentPlayerIndex);
                 Player.State currentState =  currentPlayer.getState();
-                // loops for action to see if it's hit, bust or stand
+                // loops for players action to see if it's hit, bust or stand
                 //  checks if the current player is bust if not then increment++
 
                 if (currentState != Player.State.STAND ||
@@ -137,10 +137,17 @@ public class Game {
 // -------------- if the dealer is less than 17 they have to draw a card, hit deck...
                 while (dealer.getHandValue() < 17)
                     dealer.hit(deck.dealCard());
-                /////// show winner result - if dealer busts that resolves the game ////////
+
+//                resolve dealer hand
+                if(dealer.getHandValue() > 21)
+                    dealer.setState(Player.State.BUST);
+
+// --------------- show winner result
                 if (dealer.getState() == Player.State.BUST) {
+
                     for (int i = 0; i < players.size(); i++) {
                         if (players.get(i).getState() != Player.State.BUST) {
+
                             players.get(i).setState(Player.State.WON);
                         }
                     }

@@ -7,5 +7,5 @@ import java.util.List;
  */
 
 public class Dealer {
-
+// dealer is an instance of player
 }

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         // create table to play at, add player to the table
         mGame = new Game();
-        mPlayer = new Player("kyle");
+        mPlayer = new Player("Player One");
         mGame.sitAtTable(mPlayer);
         mGame.clearTable();
     }

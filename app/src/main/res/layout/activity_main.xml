@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,25 +9,91 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.user.twentyone.MainActivity">
+    tools:context="com.example.user.twentyone.MainActivity"
+    android:background="@drawable/blackjack">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/result_text"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:background="#000000"
+        android:textStyle="bold"
+        android:layout_marginBottom="26dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/player_result_text"
+        android:textColor="#ffffff"
+        android:background="#000000"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_weight="0.1"
+        android:layout_above="@+id/dealer_result_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="DEAL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonDeal"
+        android:onClick="buttonDeal"
+        android:background="#000000"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="36dp"
+        android:layout_alignBottom="@+id/buttonStand"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_text"
         android:id="@+id/textView"
+        android:textSize="35dp"
+        android:textColor="#ffffff"
+        android:background="#000000"
+        android:textStyle="bold"
+        android:layout_marginTop="56dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="20dp"/>
+        android:layout_centerHorizontal="true" />
 
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:ems="10"-->
-        <!--android:layout_below="@+id/textView"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:id="@+id/playerValue" />-->
+    <Button
+        android:text="@string/stand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonStand"
+        android:onClick="buttonStand"
+        android:background="#000000"
+        android:textColor="#ffffff"
+        android:layout_alignBaseline="@+id/buttonHit"
+        android:layout_alignBottom="@+id/buttonHit"
+        android:layout_toRightOf="@+id/buttonDeal"
+        android:layout_toEndOf="@+id/buttonDeal"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp" />
+
+    <TextView
+        android:id="@+id/dealer_result_text"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:background="#000000"
+        android:textStyle="bold"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_weight="0.1"
+        android:layout_above="@+id/result_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/buttonHit"
@@ -35,64 +102,14 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:onClick="buttonHit"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp" />
-
-    <Button
-        android:text="@string/stand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonHit"
-        android:layout_alignLeft="@+id/buttonHit"
-        android:layout_alignStart="@+id/buttonHit"
-        android:id="@+id/buttonStand"
-        android:onClick="buttonStand"
-        />
-
-    <Button
-        android:text="DEAL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonStand"
-        android:layout_alignLeft="@+id/buttonStand"
-        android:layout_alignStart="@+id/buttonStand"
-        android:id="@+id/buttonDeal"
-        android:onClick="buttonDeal" />
-
-    <TextView
-        android:text="Result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/result_text"
-        android:textSize="20dp"/>
-
-    <TextView
-        android:id="@+id/player_result_text"
-        android:textSize="20dp"
-        android:text="Player Hand:"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_weight="0.1"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/buttonDeal"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/dealer_result_text"
-        android:textSize="20dp"
-        android:layout_marginTop="22dp"
-        android:text="Dealer Hand: "
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_weight="0.1"
-        android:layout_below="@+id/player_result_text"
-        android:layout_centerHorizontal="true" />
+        android:background="#000000"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="27dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginEnd="17dp"
+        android:layout_above="@+id/player_result_text"
+        android:layout_toLeftOf="@+id/buttonDeal"
+        android:layout_toStartOf="@+id/buttonDeal" />
 
 
 </RelativeLayout>
