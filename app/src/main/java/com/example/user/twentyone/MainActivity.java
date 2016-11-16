@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public void buttonDeal(View view){
         try {
         Log.d("TwentyOne", "Deal button clicked!");
+
         if(table.startNewGame())
         table.checkTable();
 

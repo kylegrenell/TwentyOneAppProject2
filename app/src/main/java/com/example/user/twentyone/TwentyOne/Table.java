@@ -141,7 +141,7 @@ public class Table {
                     dealer.hit(deck.dealCard());
 
                 /////// show winner result ////////
-
+//                    if dealer busts that resolves the game
                 if (dealer.getState() == Player.State.BUST) {
                     for (int i = 0; i < players.size(); i++) {
                         if (players.get(i).getState() != Player.State.BUST) {
@@ -151,14 +151,13 @@ public class Table {
                 } else {
 
                     for (int i = 0; i < players.size(); i++) {
+                        // if not bust then check these things...
+                        // so if a players hand value is more or less than dealers, the state of play should be
+                        // passed in to the loop
+                        // if the players hand value is less than the dealers hand player LOST
+                        // else WON
                         // check if the players is not (!=) bust
                         if (players.get(i).getState() != Player.State.BUST) {
-
-                            // if not bust then check these things...
-                            // so if a players hand value is more or less than dealers, the state of play should be
-                            // passed in to the loop
-                            // if the players hand value is less than the dealers hand player LOST
-                            // else WON
 
                             // Lost < less than dealer but not bust
                             if (players.get(i).getHandValue() < dealer.getHandValue())
@@ -183,18 +182,46 @@ public class Table {
         // if table state does not equal state not playing then table state equals new game
         if (tableState != State.PLAYING)
             tableState = State.NEW_GAME;
-    return true;
-}
 
-
-        // take in the list of current players and output the table
-
-        public void clearTable()
-        {
-            for (int i = 0; i < players.size(); i++)
-            {
-                Log.v(String.valueOf(i),String.valueOf(players.get(i).getHandValue() ) );
-            }
-            Log.v("Dealer",String.valueOf(dealer.getHandValue() ) );
-        }
+        return tableState != State.PLAYING;
     }
+
+
+    // take in the list of current players and output the table
+
+    public void clearTable() {
+        for (int i = 0; i < players.size(); i++) {
+            Log.v(String.valueOf(i), String.valueOf(players.get(i).getHandValue()));
+        }
+        Log.v("Dealer", String.valueOf(dealer.getHandValue()));
+    }
+
+
+//////// print results //////////
+
+
+//Notice how the code declares a variable within the initialization expression. The scope of this variable extends from its
+// declaration to the end of the block governed by the for statement, so it can be used in the termination and increment
+// expressions as well. If the variable that controls a for statement is not needed outside of the loop, it's best to declare
+// the variable in the initialization expression. The names i, j, and k are often used to control for loops; declaring them within
+// the initialization expression limits their life span and reduces errors.
+//
+// The three expressions of the for loop are optional; an infinite loop can be created as follows:
+//
+/// infinite loop --
+//
+// for ( ; ; ) {
+//
+//        // your code goes here
+//    }
+
+
+    public String printResults() {
+        String result = "";
+        // add dealer state
+        for (int i = 0; i < players.size(); i++) {
+            result += "Player: " + players.get(i).getName() + players.get(i).getState().toString();
+        }
+        return "";
+    }
+}

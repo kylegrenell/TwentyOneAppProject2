@@ -41,6 +41,11 @@ public class Player {
         WAIT
     }
 
+    // getter player
+    public String getName(){
+        return name;
+    }
+
 
     // what action does the player want to do ie wait, hit or stand
     public Action askAction(){
