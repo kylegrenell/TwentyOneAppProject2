@@ -3,7 +3,6 @@ package com.example.user.twentyone;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -47,17 +46,20 @@ public class MainActivity extends AppCompatActivity {
     // event handler for the HIT option
     public void buttonHit(View view) {
         try {
-            table.getCurrentPlayer().setAction(Player.Action.HIT);
+            table.getCurrentPlayerIndex().setAction(Player.Action.HIT);
             Log.d("TwentyOne", "Hit button clicked!");
             table.checkTable();
             table.clearTable();
 
 //        display the hand text on the screen
             TextView playerText = (TextView) findViewById(R.id.player_result_text);
-            playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+            playerText.setText(String.valueOf(table.getCurrentPlayerIndex().getHandValue()));
 
             TextView dealerText = (TextView) findViewById(R.id.dealer_result_text);
             dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
+
+//            resolve game
+            resolve();
         }
         catch (Exception error)
         {
@@ -70,21 +72,38 @@ public class MainActivity extends AppCompatActivity {
     // event handler for the STAND option
     public void buttonStand(View view) {
         try {
-        table.getCurrentPlayer().setAction(Player.Action.STAND);
+        table.getCurrentPlayerIndex().setAction(Player.Action.STAND);
         Log.d("TwentyOne", "Stand button clicked!");
         table.checkTable();
 
         TextView playerText = (TextView)findViewById(R.id.player_result_text);
-        playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+        playerText.setText(String.valueOf(table.getCurrentPlayerIndex().getHandValue()));
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
         dealerText.setText(String.valueOf(table.getDealer().getHandValue()));
+
+//      resolve game
+            resolve();
     }
     catch (Exception error)
     {
         Log.d("Hit error", error.getMessage());
     }
 }
+
+
+    // resolve the hand
+    public void resolve() {
+        if (table.checkTableFinished()) {
+
+            TextView resultsText = (TextView) findViewById(R.id.result_text);
+            resultsText.setText(table.printResults());
+
+            table.printResults();
+        }
+    }
+
+
     // event handler for deal button
     public void buttonDeal(View view){
         try {
@@ -94,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         table.checkTable();
 
         TextView playerText = (TextView)findViewById(R.id.player_result_text);
-        playerText.setText(String.valueOf(table.getCurrentPlayer().getHandValue()));
+        playerText.setText(String.valueOf(table.getCurrentPlayerIndex().getHandValue()));
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
         dealerText.setText(String.valueOf(table.getDealer().getHandValue()));

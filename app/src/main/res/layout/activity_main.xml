@@ -85,11 +85,12 @@
         android:onClick="buttonDeal" />
 
     <TextView
+        android:text="Result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/player_result_text"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView3" />
+        android:id="@+id/result_text" />
 
 
 </RelativeLayout>

@@ -13,11 +13,11 @@ import java.util.List;
 
 public class Deck {
 
-    // array for suit and rank *******************************************
+    // array for suit and rank
     private ArrayList<Card> cards;
 
 
-    // a deck made up of 4 suits and 13 ranks ****************************
+    // a deck made up of 4 suits and 13 ranks
     // call initialise method
     // shuffle the deck
     public Deck() {
@@ -25,7 +25,7 @@ public class Deck {
     }
 
 
-    // initialise the array***********************************************
+    // initialise the array
     public void initialiseDeck() {
 
         cards = new ArrayList<Card>();
@@ -42,14 +42,14 @@ public class Deck {
     }
 
 
-    // shuffle array of cards**********************************************
+    // shuffle array of cards
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
 
 
-    // remove cards deck to decrease deck size*****************************
+    // remove cards deck to decrease deck size
     public void removeCards(){
         for (int i = 0; i < cards.size(); i++ )
         {
@@ -60,7 +60,7 @@ public class Deck {
     }
 
 
-    // should deal the cards and then return *******************************
+    // should deal the cards and then return
     public Card dealCard(){
         return cards.remove(0);
     }

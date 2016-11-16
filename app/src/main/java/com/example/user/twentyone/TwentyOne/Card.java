@@ -14,16 +14,8 @@ public class Card {
         rank = Rank.values()[r];
     }
 
-
-
-
-
-
-
-
-
-//    class example
-//    public int getValue() {
+//
+//    public int getCardValue() {
 //        int value = rank.ordinal() + 1;
 //        if (value > 10) value = 10;
 //        return value;
