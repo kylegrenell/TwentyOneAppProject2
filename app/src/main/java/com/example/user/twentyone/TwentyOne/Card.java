@@ -15,6 +15,7 @@ public class Card {
     }
 
     // this should make the face cards 11-12 the value of 10
+    // ordinal is order in series, returns the ordinal of this enumeration constant
     public int getCardValue() {
         int value = rank.ordinal() + 1;
         if (value > 10) value = 10;

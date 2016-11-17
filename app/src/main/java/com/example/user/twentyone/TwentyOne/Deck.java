@@ -13,41 +13,51 @@ import java.util.List;
 
 public class Deck {
 
+    // array for suit and rank
     private ArrayList<Card> cards;
 
+
+    // deck made up of 4 suits and 13 rank, call initialise method, shuffle the deck
     public Deck() {
         initialiseDeck();
     }
 
+
     // initialise the array
     public void initialiseDeck() {
 
-        this.cards = new ArrayList<Card>();
+        cards = new ArrayList<Card>();
 
         for (int s = 0; s < 4; s++) {
+            // i for suit, r for rank, ++ increments
             for (int r = 0; r < 13; r++) {
-                this.cards.add(new Card(s, r));
+                cards.add(new Card(s, r));
             }
+            shuffle();
         }
-        shuffle();
     }
 
-    // shuffle cards
+
+    // shuffle array of cards
     public void shuffle() {
-        Collections.shuffle(this.cards);
+        Collections.shuffle(cards);
     }
 
-    // decrease deck size
+
+    // remove cards deck to decrease deck size
     public void removeCards(){
-        for (int i = 0; i < this.cards.size(); i++ )
+        for (int i = 0; i < cards.size(); i++ )
         {
-            Log.d("Deck", this.cards.get(i).toString());
+            Log.v("Deck", cards.get(i).toString());
+            // log.d is API for sending log output
+            // what's the difference with log.v?
         }
     }
 
-    // deal the cards and then return
+
+    // should deal the cards and then return
     public Card dealCard(){
-        return this.cards.remove(0);
+        return cards.remove(0);
     }
 
 }

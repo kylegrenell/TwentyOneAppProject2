@@ -19,6 +19,7 @@ public class Game {
     private State tableState;
     int currentPlayerIndex;
 
+
     public enum State {
         NEW_GAME,
         PLAYING,
@@ -37,10 +38,6 @@ public class Game {
         players.add(player);
     }
 
-    // ----------- can leave the table
-    public void leaveTable(Player player) {
-        players.remove(player);
-    }
 
     // ----------- getter for current player
     public Player getCurrentPlayerIndex() {
@@ -66,12 +63,12 @@ public class Game {
         }
     }
 
-    // when start up a new game that will get everybody card and play first round
-    // check the table state of each round . If it's a new game it will loop through, else it will
+    // when start up a new game that will get everybody a card to play the first round
+    // check the table state of each round. If it's a new game it will loop through, else it will
     // ask the players for their response. Once response given it goes back in and checks the loop
 
     private void setUpNewGame() {
-        // players start at zero, initialise the deck, reset each game - clear the hand
+//------------- players start at zero, initialise the deck, reset each game - clear the hand
         currentPlayerIndex = 0;
         deck.initialiseDeck();
         dealer.clearHand();
@@ -89,19 +86,21 @@ public class Game {
     }
 
 
+// -------------- massively needs refactoring, this is where the results are being printed wrong
     public void checkTable() {
         switch (tableState) {
             case NEW_GAME:
                 setUpNewGame();
                 break;
 
-// ------------- state of Playing, ask players for an action
+// ------------- state of Playing, ask players for an action, loops for players action to see if it's hit, bust or stand
+// ------------- checks if the current player is bust if not then increment++
+
             case PLAYING: {
 
                 Player currentPlayer = players.get(currentPlayerIndex);
                 Player.State currentState =  currentPlayer.getState();
-                // loops for players action to see if it's hit, bust or stand
-                //  checks if the current player is bust if not then increment++
+
 
                 if (currentState != Player.State.STAND ||
                         currentState != Player.State.BUST) {
@@ -115,7 +114,8 @@ public class Game {
                         } else if (currentPlayer.getHandValue() == 21) {
                             currentPlayer.setState(Player.State.STAND);
                         }
-                    } // check if the player stands, else increment the current player by 1 (++)
+                    }
+                    // check if the player stands, else increment the current player by 1 (++)
                     if (currentPlayer.askAction() == Player.Action.STAND) {
                         currentPlayer.setState(Player.State.STAND);
                         currentPlayer.setAction(Player.Action.WAIT);
@@ -147,7 +147,6 @@ public class Game {
 
                     for (int i = 0; i < players.size(); i++) {
                         if (players.get(i).getState() != Player.State.BUST) {
-
                             players.get(i).setState(Player.State.WON);
                         }
                     }
@@ -171,12 +170,14 @@ public class Game {
         }
     }
 
+
     // ----------------- start a new game
     public boolean startNewGame() {
         if (tableState != State.PLAYING)
             tableState = State.NEW_GAME;
         return tableState != State.PLAYING;
     }
+
 
     // ----------------- take in the list of current players and output the table
     public void clearTable() {
@@ -187,10 +188,10 @@ public class Game {
     }
 
 
+//  print hand result
     public String printResults()
     {
-        String result = "";
-
+        String result = " ";
         for (int i = 0; i < players.size(); i++)
         {
             // concatenate / chain string with name and results

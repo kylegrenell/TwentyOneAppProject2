@@ -21,7 +21,7 @@ public class Player {
         this.name = name;
         this.hand = new ArrayList<Card>();
         // has a hand with no cards because they're not yet dealt
-        playerGameState = State.PLAYING;
+        this.playerGameState = State.PLAYING;
         // game state is that they're starting the game (PLAYING)
     }
 
@@ -43,84 +43,86 @@ public class Player {
 
     // getter player
     public String getName(){
-        return name;
+        return this.name;
     }
 
 
     // what action does the player want to do ie wait, hit or stand
     public Action askAction(){
-        return currentAction;
+        return this.currentAction;
     }
 
 
     // setter for the action enum
     public void setAction(Action action){
-        currentAction = action;
+        this.currentAction = action;
     }
 
 
     // hits and then returns a card to the hand
     public void hit(Card card){
-        hand.add(card);
+        this.hand.add(card);
     }
 
 
     //Stand won't ask player to hit (end their turn)
     public void stand(){
-        playerGameState = State.STAND;
+        this.playerGameState = State.STAND;
     }
 
     // getter for state of the player in the game
     public State getState(){
-        return playerGameState;
+        return this.playerGameState;
     }
 
 
     // setter for state (ie can do... can't do...)
     public void setState(State state){
-        playerGameState = state;
+        this.playerGameState = state;
     }
 
 
     // clear the players hand
     public void clearHand(){
-        hand.clear();
+        this.hand.clear();
     }
 
 
     // print hand to the log
     public void showHand() {
-        for (int i = 0; i < hand.size(); i++) {
-            Log.v(this.name, hand.get(i).toString());
+        for (int i = 0; i < this.hand.size(); i++) {
+            Log.v(this.name, this.hand.get(i).toString());
         }
     }
 
     //get the value of the cards in hand
-    public int getHandValue(){
+    public int getHandValue() {
 
         int total = 0;
-        int aceCount = 0;
+//        int aceCount = 0;
 //        if total > 21 ace = 1 else ace = 10
 
-        for(int i = 0; i < hand.size(); i++)
-            if(hand.get(i).getCardValue() != 13)
-                total += hand.get(i).getCardValue();
-            else
-                aceCount++;
-
-        for(int i = 0; i < aceCount; i++)
-        {
-            total += 10; // first ace equal to 10 counted as a high
-            if(total > 21) // without the ace
-                total -= 9; // takes away 9 from the ace
-        }
+        for (int i = 0; i < this.hand.size(); i++)
+            if (this.hand.get(i).getCardValue() != 13)
+                total += this.hand.get(i).getCardValue();
         return total;
-
     }
+//            else
+//                aceCount++;
+
+//        for(int i = 0; i < aceCount; i++)
+//        {
+//            total += 10; // first ace equal to 10 counted as a high
+//            if(total > 21) // without the ace
+//                total -= 9; // takes away 9 from the ace
+//        }
+//        return total;
+//
+//    }
 
     // getter for card count
     public int getCardCount(){
-        return hand.size();
+        return this.hand.size();
     }
 
 }
