@@ -17,5 +17,15 @@ public enum Rank {
         TEN,
         JACK,
         QUEEN,
-        KING
+        KING;
+
+//        ("Ace")
+//        private String mtitile;
+//
+//        Rank( String title ){
+//
+//        }
+
+
+//        public getTitle
     }

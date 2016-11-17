@@ -28,14 +28,13 @@ public class Deck {
 
         this.cards = new ArrayList<Card>();
 
-        for (int s = 0; s < 4; s++) {
-            // i for suit, r for rank, ++ increments
-            for (int r = 0; r < 13; r++) {
-                this.cards.add(new Card(s, r));
+                for ( Rank aRank : Rank.values() ) {
+                    for( Suit aSuit : Suit.values() )
+                this.cards.add(new Card(aSuit, aRank));
             }
             shuffle();
         }
-    }
+
 
 
     // shuffle array of cards

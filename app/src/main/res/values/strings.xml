@@ -10,4 +10,5 @@
     <string name="say_hello">Services</string>
     <string name="give_pity">o(^`>^)o Waiter</string>
     <string name="cash_out">£££ Cash Out £££</string>
+    <string name="player_hand"></string>
 </resources>

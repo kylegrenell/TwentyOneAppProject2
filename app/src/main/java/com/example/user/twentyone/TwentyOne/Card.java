@@ -9,9 +9,10 @@ public class Card {
     private Rank mRank;
     private Suit mSuit;
 
-    public Card(int s, int r) {
-        this.mRank = mRank.values()[r];
-        this.mSuit = mSuit.values()[s];
+
+    public Card(Suit s, Rank r) {
+        this.mRank = r;
+        this.mSuit = s;
     }
 
     // this should make the face cards 11-12 the value of 10
@@ -22,9 +23,9 @@ public class Card {
         return value;
     }
 
-    @Override
+    //  override? - override a method in the superclass... nope.
     public String toString() {
-        return this.mRank + " of " + this.mSuit;
+        return this.mRank.name() + " of " + this.mSuit.name();
     }
 }
 

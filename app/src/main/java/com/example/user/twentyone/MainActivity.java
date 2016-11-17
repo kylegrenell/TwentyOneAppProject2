@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     Player mPlayer;
     Game mGame;
+    Card mCard;
 
 
     @Override
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
         TextView playerText = (TextView) findViewById(R.id.player_result_text);
         playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
+
+//        TextView playerHand = (TextView) findViewById(R.id.playerHand);
+//                playerHand.setText(mCard.toString());
 
         TextView dealerText = (TextView) findViewById(R.id.dealer_result_text);
         dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
@@ -114,12 +118,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
 
         if (item.getItemId() == R.id.action_pity){
-            Log.d("Menu", "Menu item 'Pity Fool' clicked");
+            Log.d("Menu", "Menu item 'waiter' clicked");
             Toast.makeText(MainActivity.this, R.string.give_pity, Toast.LENGTH_LONG).show();
             return true;
         }
         if (item.getItemId() == R.id.cash_out){
-            Log.d("Menu", "Menu item 'Pity Fool' clicked");
+            Log.d("Menu", "Menu item 'cash out' clicked");
             Toast.makeText(MainActivity.this, R.string.cash_out, Toast.LENGTH_LONG).show();
             return true;
         }
