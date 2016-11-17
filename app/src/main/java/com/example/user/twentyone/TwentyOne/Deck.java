@@ -26,12 +26,12 @@ public class Deck {
     // initialise the array
     public void initialiseDeck() {
 
-        cards = new ArrayList<Card>();
+        this.cards = new ArrayList<Card>();
 
         for (int s = 0; s < 4; s++) {
             // i for suit, r for rank, ++ increments
             for (int r = 0; r < 13; r++) {
-                cards.add(new Card(s, r));
+                this.cards.add(new Card(s, r));
             }
             shuffle();
         }
@@ -40,15 +40,15 @@ public class Deck {
 
     // shuffle array of cards
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(this.cards);
     }
 
 
     // remove cards deck to decrease deck size
     public void removeCards(){
-        for (int i = 0; i < cards.size(); i++ )
+        for (int i = 0; i < this.cards.size(); i++ )
         {
-            Log.v("Deck", cards.get(i).toString());
+            Log.v("Deck", this.cards.get(i).toString());
             // log.d is API for sending log output
             // what's the difference with log.v?
         }
@@ -57,7 +57,7 @@ public class Deck {
 
     // should deal the cards and then return
     public Card dealCard(){
-        return cards.remove(0);
+        return this.cards.remove(0);
     }
 
 }

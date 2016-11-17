@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     // event handler for deal button
     public void buttonDeal(View view){
         Log.d("TwentyOne", "Deal button clicked!");
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
         dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
     }
 
+
+
     @Override
     // boolean return type - whether menu as created successfully
     public boolean onCreateOptionsMenu(Menu menu){
@@ -104,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.activity_main, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){

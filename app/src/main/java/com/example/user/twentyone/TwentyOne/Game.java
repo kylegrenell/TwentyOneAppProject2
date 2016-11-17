@@ -35,27 +35,27 @@ public class Game {
 
     // ----------- player can join table
     public void sitAtTable(Player player) {
-        players.add(player);
+        this.players.add(player);
     }
 
 
     // ----------- getter for current player
     public Player getCurrentPlayerIndex() {
-        if (currentPlayerIndex > players.size() - 1)
-            return players.get(currentPlayerIndex - 1);
+        if (this.currentPlayerIndex > players.size() - 1)
+            return this.players.get(currentPlayerIndex - 1);
         else
             return players.get(currentPlayerIndex);
     }
 
     //  ----------  getter for the dealer
     public Player getDealer() {
-        return dealer;
+        return this.dealer;
     }
 
 
     // ----------- check if the table hand has finished
     public boolean checkTableFinished(){
-        if(tableState == State.RESOLVE) {
+        if(this.tableState == State.RESOLVE) {
             return true;
         }
         else {
@@ -74,15 +74,15 @@ public class Game {
         dealer.clearHand();
 
         for (int i = 0; i < players.size(); i++) {
-            players.get(i).setState(Player.State.PLAYING);
-            players.get(i).clearHand();
+            this.players.get(i).setState(Player.State.PLAYING);
+            this.players.get(i).clearHand();
         }
         while (dealer.getCardCount() < 2) {
-            for (int i = 0; i < players.size(); i++)
-                players.get(i).hit(deck.dealCard());
-            dealer.hit(deck.dealCard());
+            for (int i = 0; i < this.players.size(); i++)
+                this.players.get(i).hit(deck.dealCard());
+            this.dealer.hit(deck.dealCard());
         }
-        tableState = State.PLAYING;
+        this.tableState = State.PLAYING;
     }
 
 
@@ -98,7 +98,7 @@ public class Game {
 
             case PLAYING: {
 
-                Player currentPlayer = players.get(currentPlayerIndex);
+                Player currentPlayer = this.players.get(currentPlayerIndex);
                 Player.State currentState =  currentPlayer.getState();
 
 
@@ -131,40 +131,40 @@ public class Game {
                 else
                     break;
             }
-
-            case RESOLVE: {
+            case RESOLVE:
 
 // -------------- if the dealer is less than 17 they have to draw a card, hit deck...
-                while (dealer.getHandValue() < 17)
-                    dealer.hit(deck.dealCard());
+                while (this.dealer.getHandValue() < 17)
+                    this.dealer.hit(deck.dealCard());
 
 //                resolve dealer hand
-                if(dealer.getHandValue() > 21)
-                    dealer.setState(Player.State.BUST);
+                if(this.dealer.getHandValue() > 21)
+                    this.dealer.setState(Player.State.BUST);
 
 // --------------- show winner result
-                if (dealer.getState() == Player.State.BUST) {
+                if (this.dealer.getState() == Player.State.BUST) {
 
-                    for (int i = 0; i < players.size(); i++) {
-                        if (players.get(i).getState() != Player.State.BUST) {
-                            players.get(i).setState(Player.State.WON);
+                    for (int i = 0; i < this.players.size(); i++) {
+                        if (this.players.get(i).getState() != Player.State.BUST) {
+                            this.players.get(i).setState(Player.State.WON);
                         }
                     }
                 }
 // not bust, check players hand value > or < than dealers and not bust. If hand < dealers hand Lose, > Win.
-                else {
-                    for (int i = 0; i < players.size(); i++) {
-                        if (players.get(i).getState() != Player.State.BUST) {
-                            if (players.get(i).getHandValue() < dealer.getHandValue())
-                                players.get(i).setState(Player.State.LOST);
-                            if (players.get(i).getHandValue() < dealer.getHandValue())
-                                players.get(i).setState(Player.State.WON);
-                            if (players.get(i).getHandValue() == dealer.getHandValue())
-                                players.get(i).setState(Player.State.PUSH);
+                else
+                {
+                    for (int i = 0; i < this.players.size(); i++) {
+                        if (this.players.get(i).getState() != Player.State.BUST) {
+                            if (this.players.get(i).getHandValue() < this.dealer.getHandValue())
+                                this.players.get(i).setState(Player.State.LOST);
+                            if (this.players.get(i).getHandValue() < this.dealer.getHandValue())
+                                this.players.get(i).setState(Player.State.WON);
+                            if (this.players.get(i).getHandValue() == this.dealer.getHandValue())
+                                this.players.get(i).setState(Player.State.PUSH);
                         }
                     }
                 }
-            }
+
             default:
                 break;
         }
@@ -173,29 +173,28 @@ public class Game {
 
     // ----------------- start a new game
     public boolean startNewGame() {
-        if (tableState != State.PLAYING)
-            tableState = State.NEW_GAME;
-        return tableState != State.PLAYING;
+        if (this.tableState != State.PLAYING)
+            this.tableState = State.NEW_GAME;
+        return this.tableState != State.PLAYING;
     }
 
 
     // ----------------- take in the list of current players and output the table
     public void clearTable() {
-        for (int i = 0; i < players.size(); i++) {
-            Log.v(String.valueOf(i), String.valueOf(players.get(i).getHandValue()));
+        for (int i = 0; i < this.players.size(); i++) {
+            Log.v(String.valueOf(i), String.valueOf(this.players.get(i).getHandValue()));
         }
-        Log.v("Dealer", String.valueOf(dealer.getHandValue()));
+        Log.v("Dealer", String.valueOf(this.dealer.getHandValue()));
     }
 
 
 //  print hand result
-    public String printResults()
-    {
+    public String printResults() {
         String result = " ";
-        for (int i = 0; i < players.size(); i++)
+        for (int i = 0; i < this.players.size(); i++)
         {
             // concatenate / chain string with name and results
-            result += "Player: " + players.get(i).getName() + " " + players.get(i).getState().toString();
+            result += "Player: " + this.players.get(i).getName() + " " + this.players.get(i).getState().toString();
         }
         return result;
     }
