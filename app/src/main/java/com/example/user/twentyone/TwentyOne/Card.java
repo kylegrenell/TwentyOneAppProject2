@@ -6,27 +6,40 @@ package com.example.user.twentyone.TwentyOne;
 
 public class Card {
 
-    private Rank mRank;
-    private Suit mSuit;
+    private Rank rank;
+    private Suit suit;
 
 
-    public Card(Suit s, Rank r) {
-        this.mRank = r;
-        this.mSuit = s;
+    public Card(Suit suit, Rank rank) {
+        this.rank = rank;
+        this.suit = suit;
     }
 
     // this should make the face cards 11-12 the value of 10
     // ordinal is order in series, returns the ordinal of this enumeration constant
     public int getCardValue() {
-        int value = this.mRank.ordinal() + 1;
+        int value = this.rank.ordinal() + 1;
         if (value > 10) value = 10;
         return value;
     }
 
+//    get suit
+    public Suit getSuit(){
+        return this.suit;
+    }
+
+//    get rank
+    public Rank getRank(){
+        return this.rank;
+    }
+
     //  override? - override a method in the superclass... nope.
     public String toString() {
-        return this.mRank.name() + " of " + this.mSuit.name();
+        return rank.name() + " of " + this.suit.name();
+    }
+
+    public String getCardName(){
+        return Integer.toString(rank.getNumberValue()) + " of " + suit.getStringValue();
     }
 }
-
 

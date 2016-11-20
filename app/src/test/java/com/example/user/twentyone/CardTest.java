@@ -13,12 +13,13 @@ import static junit.framework.Assert.assertEquals;
  * Created by user on 16/11/2016.
  */
 
+//
 //public class CardTest {
 //    Card card;
 //
 //    @Before
 //    public void beforeEach() {
-//        card = new Card(Rank.ACE, card.Suit.CLUB);
+//        card = new Card(Rank.ACE, card.suit.CLUB);
 //    }
 //
 //    @Test
@@ -28,6 +29,7 @@ import static junit.framework.Assert.assertEquals;
 //
 //    @Test
 //    public void canOutputAsString() {
-//        assertEquals("ACE of SPADES", card.toString());
+//        assertEquals("ACE of CLUB", card.toString());
 //    }
-//}
+//
+//        }

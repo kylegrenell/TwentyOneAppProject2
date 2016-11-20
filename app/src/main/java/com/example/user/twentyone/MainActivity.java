@@ -14,12 +14,13 @@ import android.widget.Toast;
 import com.example.user.twentyone.TwentyOne.Card;
 import com.example.user.twentyone.TwentyOne.Player;
 import com.example.user.twentyone.TwentyOne.Game;
+import com.example.user.twentyone.TwentyOne.Rank;
 
 public class MainActivity extends AppCompatActivity {
 
     Player mPlayer;
     Game mGame;
-    Card mCard;
+    Card Card;
 
 
     @Override
@@ -48,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextView playerText = (TextView) findViewById(R.id.player_result_text);
         playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
-
-//        TextView playerHand = (TextView) findViewById(R.id.playerHand);
-//                playerHand.setText(mCard.toString());
 
         TextView dealerText = (TextView) findViewById(R.id.dealer_result_text);
         dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
@@ -95,8 +93,11 @@ public class MainActivity extends AppCompatActivity {
             mGame.checkTable();
         }
 
-        TextView playerText = (TextView)findViewById(R.id.player_result_text);
-        playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
+        TextView playerHand = (TextView) findViewById(R.id.playerHand);
+        playerHand.setText(mGame.getCurrentPlayerIndex().getHandValue());
+
+//        TextView playerText = (TextView)findViewById(R.id.player_result_text);
+//        playerText.setText(mGame.printHandValue().toString());
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
         dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
