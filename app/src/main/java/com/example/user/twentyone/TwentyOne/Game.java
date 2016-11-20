@@ -27,7 +27,7 @@ public class Game {
         RESOLVE
     }
 
-    public Game ( ) {
+    public Game() {
         this.tableState = NEW_GAME;
         this.players = new ArrayList <Player>();
         this.dealer = new Player( "Dealer" );
@@ -81,6 +81,7 @@ public class Game {
 
     public void handlePlaying() {
         switch(tableState) {
+
             case PLAYING:
 
                 Player currentPlayer = this.players.get( currentPlayerIndex );
@@ -89,14 +90,14 @@ public class Game {
                 if ( currentState != Player.State.STAND ||
                         currentState != Player.State.BUST ) {
                     if ( currentPlayer.askAction() == Player.Action.HIT ) {
-                        currentPlayer.hit( deck.dealCard () );
-                        if ( currentPlayer.getHandValue () > 21 ) {
+                        currentPlayer.hit( deck.dealCard() );
+                        if ( currentPlayer.getHandValue() > 21 ) {
                             currentPlayer.setState( Player.State.BUST );
                         } else if
-                                ( currentPlayer.getHandValue () == 21 ) {
+                                ( currentPlayer.getHandValue() == 21 ) {
                             currentPlayer.setState( Player.State.STAND );
                         }
-                    } if ( currentPlayer.askAction () == Player.Action.STAND ) {
+                    } if ( currentPlayer.askAction() == Player.Action.STAND ) {
                         currentPlayer.setState( Player.State.STAND );
                         currentPlayer.setAction( Player.Action.WAIT );
                         currentPlayerIndex++;
@@ -104,7 +105,7 @@ public class Game {
                         currentPlayer.setAction( Player.Action.WAIT );
                         currentPlayerIndex++;
                     }
-                } if ( currentPlayerIndex > players.size () - 1 )
+                } if ( currentPlayerIndex > players.size() - 1 )
                     tableState = RESOLVE;
                 else
                     break;
@@ -117,6 +118,7 @@ public class Game {
 
     public void handleResolve() {
         switch(tableState) {
+
             case RESOLVE:
 
                 while ( this.dealer.getHandValue() < 17 )
@@ -131,14 +133,14 @@ public class Game {
                     }
                 } else {
                     for ( int i = 0 ; i < this.players.size() ; i++ ) {
-                        if ( this.players.get( i ).getState() != Player.State.BUST ) {
+                        if ( this.players.get(i).getState() != Player.State.BUST ) {
 
                             if ( this.players.get(i).getHandValue() < dealer.getHandValue() )
-                                players.get( i ).setState( Player.State.LOST );
-                            if ( players.get( i ).getHandValue() < dealer.getHandValue() )
-                                players.get( i ).setState( Player.State.WON );
-                            if ( players.get( i ).getHandValue() == dealer.getHandValue() )
-                                players.get( i ).setState( Player.State.PUSH );
+                                players.get(i).setState( Player.State.LOST );
+                            if ( players.get(i).getHandValue() < dealer.getHandValue() )
+                                players.get(i).setState( Player.State.WON );
+                            if ( players.get(i).getHandValue() == dealer.getHandValue() )
+                                players.get(i).setState( Player.State.PUSH );
                                 }
                             }
                         }
@@ -179,7 +181,7 @@ public class Game {
         for (int i = 0 ; i < players.size() ; i++ ) {
             Log.v (String.valueOf(i), String.valueOf(players.get(i).getHandValue ()) );
         }
-        Log.v ( "Dealer", String.valueOf ( dealer.getHandValue ()) );
+        Log.v( "Dealer", String.valueOf ( dealer.getHandValue ()) );
     }
 
 

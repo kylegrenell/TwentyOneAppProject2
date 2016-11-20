@@ -15,25 +15,22 @@ public class Card {
         this.suit = suit;
     }
 
-    // this should make the face cards 11-12 the value of 10
-    // ordinal is order in series, returns the ordinal of this enumeration constant
+    // this should make the face cards 11-12 the value of 10. ordinal is order in series, returns the ordinal of this enumeration constant
     public int getCardValue() {
         int value = this.rank.ordinal() + 1;
         if (value > 10) value = 10;
         return value;
     }
 
-//    get suit
+//    getters
     public Suit getSuit(){
         return this.suit;
     }
 
-//    get rank
     public Rank getRank(){
         return this.rank;
     }
 
-    //  override? - override a method in the superclass... nope.
     public String toString() {
         return rank.name() + " of " + this.suit.name();
     }
