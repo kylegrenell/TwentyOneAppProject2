@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         mGame.getCurrentPlayerIndex().setAction(Player.Action.HIT);
         Log.d("TwentyOne", "Hit button clicked!");
         mGame.checkTable();
-        mGame.clearTable();
+//        mGame.clearTable();
 
         TextView playerText = (TextView) findViewById(R.id.player_result_text);
         playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
@@ -93,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
             mGame.checkTable();
         }
 
-        TextView playerHand = (TextView) findViewById(R.id.playerHand);
-        playerHand.setText(mGame.getCurrentPlayerIndex().getHandValue());
+        TextView playerText = (TextView)findViewById(R.id.player_result_text);
+        playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
 
-//        TextView playerText = (TextView)findViewById(R.id.player_result_text);
-//        playerText.setText(mGame.printHandValue().toString());
+//        TextView playerHand = (TextView)findViewById(R.id.player_result_text);
+//        playerHand.setText(mGame.printHandValue().toString());
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
         dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
