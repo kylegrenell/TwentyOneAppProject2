@@ -36,7 +36,7 @@ public class Card {
     }
 
     public String getCardName(){
-        return Integer.toString(rank.getNumberValue()) + " of " + suit.getStringValue();
+        return Integer.toString(rank.getNumberValue()) + " of " + suit.getStringValue() + " ";
     }
 }
 
