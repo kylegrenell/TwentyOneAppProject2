@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         // create table to play at, add player to the table
         mGame = new Game();
-        mPlayer = new Player("You ");
+        mPlayer = new Player(" ");
         mGame.sitAtTable(mPlayer);
         mGame.checkTable();
         mGame.clearTable();
@@ -48,13 +48,13 @@ public class MainActivity extends AppCompatActivity {
         mGame.checkTable();
 
         TextView playerText = (TextView) findViewById(R.id.player_result_text);
-        playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
+        playerText.setText("Player " + mGame.getCurrentPlayerIndex().getHandValue());
 
         TextView playerHand = (TextView)findViewById(R.id.hand_display);
         playerHand.setText(mPlayer.printHandValue());
 
         TextView dealerText = (TextView) findViewById(R.id.dealer_result_text);
-        dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
+        dealerText.setText("Dealer " + mGame.getDealer().getHandValue());
 
         TextView dealerHand = (TextView)findViewById(R.id.dealer_hand_display);
         dealerHand.setText(mGame.getDealer().printHandValue());
@@ -71,18 +71,17 @@ public class MainActivity extends AppCompatActivity {
         mGame.checkTable();
 
         TextView playerText = (TextView)findViewById(R.id.player_result_text);
-        playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
+        playerText.setText("Player " + mGame.getCurrentPlayerIndex().getHandValue());
 
         TextView playerHand = (TextView)findViewById(R.id.hand_display);
         playerHand.setText(mPlayer.printHandValue());
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
-        dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
+        dealerText.setText("Dealer " + mGame.getDealer().getHandValue());
 
         TextView dealerHand = (TextView)findViewById(R.id.dealer_hand_display);
         dealerHand.setText(mGame.getDealer().printHandValue());
 
-        resolve();
     }
 
 
@@ -109,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
         myTextView.setText("");
 
         TextView playerText = (TextView)findViewById(R.id.player_result_text);
-        playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
+        playerText.setText("Player " + mGame.getCurrentPlayerIndex().getHandValue());
 
         // resets previous game result
         TextView playerHand = (TextView)findViewById(R.id.hand_display);
         playerHand.setText(mPlayer.printHandValue());
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
-        dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
+        dealerText.setText("Dealer " + mGame.getDealer().getHandValue());
 
         TextView dealerHand = (TextView)findViewById(R.id.dealer_hand_display);
         dealerHand.setText(mGame.getDealer().printHandValue());
