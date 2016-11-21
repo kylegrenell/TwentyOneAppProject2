@@ -20,9 +20,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.hand = new ArrayList<Card>();
-        // has a hand with no cards because they're not yet dealt
         this.playerGameState = State.PLAYING;
-        // game state is that they're starting the game (PLAYING)
     }
 
     public enum State{
@@ -34,14 +32,13 @@ public class Player {
         STAND
     }
 
-    // get current actions
     public enum Action{
         HIT,
         STAND,
         WAIT
     }
 
-    // getter player
+    // getters
     public String getName(){
         return this.name;
     }
@@ -123,6 +120,14 @@ public class Player {
     // getter for card count
     public int getCardCount(){
         return this.hand.size();
+    }
+
+    public String printHandValue () {
+        String result = " ";
+        for ( int i = 0 ; i < this.hand.size() ; i++ ) {
+            result += hand.get(i).getCardName();
+        }
+        return result;
     }
 
 }

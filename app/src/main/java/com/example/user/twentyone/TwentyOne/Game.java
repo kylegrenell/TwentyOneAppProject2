@@ -75,7 +75,7 @@ public class Game {
     }
 
 
-    private void handlePlaying ( ) {
+    private void handlePlaying() {
         switch(tableState) {
 
             case PLAYING:
@@ -132,6 +132,7 @@ public class Game {
                     }
                 } else {
                     for ( int i = 0 ; i < this.players.size() ; i++ ) {
+
                         if ( this.players.get(i).getState() != Player.State.BUST ) {
 
                             if ( this.players.get(i).getHandValue() < dealer.getHandValue() )
@@ -145,6 +146,8 @@ public class Game {
                                 }
                             }
                         }
+            default :
+                break;
                 }
             }
 
@@ -194,13 +197,7 @@ public class Game {
         return result;
     }
 
-    public String printHandValue () {
-        String result = " ";
-        for ( int i = 0 ; i < players.size() ; i++ ) {
-            result += "Player: " + card.getCardName() + " " + card.getCardValue();
-        }
-        return result;
-    }
+
 
 
 }

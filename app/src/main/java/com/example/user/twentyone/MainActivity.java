@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         TextView playerText = (TextView)findViewById(R.id.player_result_text);
         playerText.setText("Your Hand: " + mGame.getCurrentPlayerIndex().getHandValue());
 
-//        TextView playerHand = (TextView)findViewById(R.id.player_result_text);
-//        playerHand.setText(mGame.printHandValue());
+        TextView playerHand = (TextView)findViewById(R.id.hand_display);
+        playerHand.setText(mPlayer.printHandValue());
 
         TextView dealerText = (TextView)findViewById(R.id.dealer_result_text);
         dealerText.setText("Dealer Hand: " + mGame.getDealer().getHandValue());
