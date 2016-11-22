@@ -57,11 +57,17 @@ public class Game {
     }
 
 
+
+    // when start up a new game that will get everybody a card to play the first round
+    // check the table state of each round. If it's a new game it will loop through, else it will
+    // ask the players for their response. Once response given it goes back in and checks the loop
+
+
     private void setUpNewGame() {
         currentPlayerIndex = 0;
         deck.initialiseDeck ();
         dealer.clearHand ();
-
+//------------- players start at zero, initialise the deck, reset each game - clear the hand
         for ( int i = 0 ; i < players.size () ; i++ ) {
             this.players.get(i).setState( Player.State.PLAYING );
             this.players.get(i).clearHand();
@@ -75,9 +81,12 @@ public class Game {
     }
 
 
+// now only handles the playing state, the instance of current player and current states are used to compare and evaluate
+    // where game play is
+
     private void handlePlaying() {
         switch(tableState) {
-
+        // table state is the variable being tested
             case PLAYING:
 
                 Player currentPlayer = this.players.get( currentPlayerIndex );
@@ -109,7 +118,9 @@ public class Game {
             }
         }
 
-
+//    allows a variable to be tested for equality against a list of values. Each value is called a case, and the variable being
+// switched on is checked for each case.
+//    test for a range of values for your variables
 
     private void handleResolve ( ) {
         switch(tableState) {
@@ -134,13 +145,13 @@ public class Game {
                     for ( int i = 0 ; i < this.players.size() ; i++ ) {
 
                         if ( this.players.get(i).getState() != Player.State.BUST ) {
-
+//                            what you want to happen if the value matches.
                             if ( this.players.get(i).getHandValue() < dealer.getHandValue() )
                                 players.get(i).setState( Player.State.LOST );
-
+//                            what you want to happen if the value matches.
                             if ( players.get(i).getHandValue() > dealer.getHandValue() )
                                 players.get(i).setState( Player.State.WON );
-
+//                            what you want to happen if the value matches.
                             if ( players.get(i).getHandValue() == dealer.getHandValue() )
                                 players.get(i).setState( Player.State.PUSH );
                                 }
@@ -152,7 +163,7 @@ public class Game {
             }
 
 
-
+// the overall procedure of game play where the main activity checks the state of the players and their hands/cards
     public void checkTable() {
         switch (tableState) {
             case NEW_GAME:
@@ -169,6 +180,7 @@ public class Game {
 
             default:
                 break;
+//           default terminates the enclosing switch statement
         }
     }
 
@@ -180,7 +192,9 @@ public class Game {
         return tableState != State.PLAYING;
     }
 
-
+// initialised once ; while true (player.size) ; increment
+//Conditional check - It checks to verify whether or not certain expression evaluates to true. If it is, then the loop execution
+// continues.
     public void clearTable () {
         for (int i = 0 ; i < players.size() ; i++ ) {
             Log.v (String.valueOf(i), String.valueOf(players.get(i).getHandValue ()) );
@@ -192,7 +206,7 @@ public class Game {
     public String printResults () {
         String result = " ";
         for ( int i = 0 ; i < players.size() ; i++ ) {
-            result += "Player: " + players.get(i).getName() + " " + players.get(i).getState().toString();
+            result += "#####  PLAYER " + players.get(i).getName() + " " + players.get(i).getState().toString() + "  #####";
         }
         return result;
     }

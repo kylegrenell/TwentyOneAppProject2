@@ -117,7 +117,7 @@ public class Player {
 //
 //    }
 
-    // getter for card count
+    // getter for card count, ArrayList.size() method returns the number of elements in this list i.e the size of the list
     public int getCardCount(){
         return this.hand.size();
     }
